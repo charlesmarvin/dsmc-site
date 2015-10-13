@@ -1,0 +1,135 @@
+@mixin ease-in($property, $duration) {
+  -webkit-transition: $property $duration ease-in;
+  -moz-transition: $property $duration ease-in;
+  -ms-transition: $property $duration ease-in;
+  -o-transition: $property $duration ease-in;
+  transition: $property $duration ease-in;
+}
+
+@mixin ease-out($property, $duration) {
+ -webkit-transition: $property $duration ease-out;
+  -moz-transition: $property $duration ease-out;
+  -ms-transition: $property $duration ease-out;
+  -o-transition: $property $duration ease-out;
+  transition: $property $duration ease-out;
+}
+
+@mixin ease-in-out($property, $duration) {
+  -webkit-transition: $property $duration ease-in-out;
+  -moz-transition: $property $duration ease-in-out;
+  -ms-transition: $property $duration ease-in-out;
+  -o-transition: $property $duration ease-in-out;
+  transition: $property $duration ease-in-out;
+}
+
+// .primary-navbar {
+//     background-color: rgb(40, 40, 40);
+//     box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+//     width: 100%;
+//     a {
+//       color: rgba(255,255,255,0.87);
+//       text-decoration: none !important;
+//       @include ease-out(background-color, 200ms);
+//       &:hover {
+//         color: rgba(255,255,255,0.87) !important;
+//         background-color: rgb(64,64,64) !important;
+//         @include ease-out(background-color, 400ms);
+//       }
+//       &:focus,
+//       &:active {
+//         color: rgba(255,255,255,0.87) !important;
+//       }
+//     }
+//     a.active {
+//       background-color: rgba(48,63,159, .6);
+//       &:hover,
+//       &:active,
+//       &:focus {
+//         background-color: rgba(48,63,159, .7) !important;
+//       }
+//     }
+//     .branding-home {
+//       a, a:active, a:hover, a:focus {
+//         text-transform: uppercase;
+//         letter-spacing: .1em;
+//         background-color: rgb(20, 20, 20) !important;
+//       }
+//     }
+// }
+// 
+
+.container {
+    margin: 0 18px;
+}
+
+.grid-toolbar-header {
+    
+}
+nav {
+    &.left {
+        li {
+            margin-right: 24px;
+        }
+    }
+    &.right {
+        li {
+            margin-left: 24px;
+        }
+    }
+    ul {
+        margin: 0;
+        list-style: none;
+        li {
+            display: inline-block;
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}
+#main-nav-header {
+    padding: 36px 0px 35px 0px;
+    margin-bottom: 18px;
+}
+
+.data-grid-toolbar {
+  padding-left: 1em;
+  padding-right: 1em;
+  span {
+    display: inline-block !important;
+    padding-left: .6em;
+  }
+}
+.table-hovered tbody tr:hover td .grid-item-edit-icon {
+  visibility: visible;
+  @include ease-out(visibility, 400ms);
+}
+.grid-item-edit-link {
+  .grid-item-edit-icon {
+    visibility: hidden;
+    padding-right: .6em;
+  } 
+}
+.dashboard-launcher {
+  padding-top: 2em;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  font-weight: 300;
+  color: #212121;
+  border-top: 1px transparent solid;
+  border-bottom: 1px transparent solid;
+  @include ease-out(boarder-color, 200ms);
+
+  &:hover {
+    border-top: 1px #9E9E9E solid;
+    border-bottom: 1px #9E9E9E solid;
+    color: #212121;
+  }
+}
+@media print {
+  .no-print, .no-print *
+  {
+    display: none !important;
+  }
+}
