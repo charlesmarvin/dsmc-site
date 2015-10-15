@@ -1,4 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
 language: node_js
+
 before_script:
   - npm install -g grunt-cli
-script: grunt
+script: grunt build
+
+before_deploy:
+  - docker build -t $DOCKER_USERNAME/nginx .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+deploy:
+  - docker push $DOCKER_USERNAME/nginx
