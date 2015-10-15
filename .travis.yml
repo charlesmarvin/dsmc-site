@@ -5,11 +5,11 @@ services:
 
 language: node_js
 
-install:
+before_script:
   - npm install -g grunt-cli
 script: grunt build
 
 after_success:
-  - docker build -t $DOCKER_USERNAME/nginx .
+  - docker build -t $DOCKER_IMAGE_NAME .
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push $DOCKER_USERNAME/nginx
