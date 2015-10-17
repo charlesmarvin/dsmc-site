@@ -17,7 +17,5 @@ deploy:
   username: marvin.charles@gmail.com
   password: $CLOUD_FOUNDRY_PASSWORD
   organization: threetwoonefive
-  space: development
-  on:
-    repo: charlesmarvin/dsmc-site
+  space: development=
   edge: true
