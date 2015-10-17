@@ -19,3 +19,6 @@ deploy:
   organization: threetwoonefive
   space: development
   edge: true
+  on:
+    tags: true
+    all_branches: true
