@@ -11,8 +11,7 @@ after_success:
   - docker tag $$DOCKER_IMAGE_NAME:$TRAVIS_JOB_NUMBER DOCKER_IMAGE_NAME:latest
   - docker push $DOCKER_IMAGE_NAME
 deploy:
-  provider:
-    provider: cloudfoundry
+  provider: cloudfoundry
   api: https://api.run.pivotal.io
   username: marvin.charles@gmail.com
   password: $CLOUD_FOUNDRY_PASSWORD
