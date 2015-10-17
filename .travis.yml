@@ -17,5 +17,5 @@ deploy:
   username: marvin.charles@gmail.com
   password: $CLOUD_FOUNDRY_PASSWORD
   organization: threetwoonefive
-  space: development=
+  space: development
   edge: true
