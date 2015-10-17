@@ -1,0 +1,6 @@
+---
+applications:
+- name: dsmc
+  memory: 512MB
+  instances: 2
+  path: ./dist/
