@@ -1,6 +1,7 @@
 ---
 applications:
 - name: dsmc
-  memory: 512MB
+  memory: 64MB
   instances: 2
   path: ./dist/
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
