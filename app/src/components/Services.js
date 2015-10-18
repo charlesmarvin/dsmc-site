@@ -2,14 +2,14 @@ var HTTP = require('utils/HTTP');
 
 module.exports = {
     getStudents() {
-        return HTTP.get('mockdata/students.json');
+        return HTTP.get('http://dsmc-api.cfapps.io/api/v1/students');
     },
     
     getInstructors() {
-        return HTTP.get('mockdata/instructors.json');
+        return HTTP.get('http://dsmc-api.cfapps.io/api/v1/instructors');
     },
     
     getPackages() {
-        return HTTP.get('mockdata/packages.json');
+        return HTTP.get('http://dsmc-api.cfapps.io/api/v1/packages');
     }
 };
