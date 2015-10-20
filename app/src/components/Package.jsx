@@ -1,5 +1,5 @@
 var React = require('react');
-var HTTP = require('utils/HTTP');
+var Services = require('./Services');
 
 var Package = React.createClass({
     getInitialState() {
@@ -12,7 +12,7 @@ var Package = React.createClass({
         var {id} = this.context.router.getCurrentParams();
         if (id !== 'new') {
             this.setState({id});
-            HTTP.get('/api/v1/packages/' + id, function(data) {
+            Services.getPackage(id).then(function(data) {
                 this.setState({package: data});
             }.bind(this));
         }
@@ -24,12 +24,10 @@ var Package = React.createClass({
     },
     _handleSave(event) {
         event.preventDefault();
-        var endpoint = '/api/v1/packages';
         if (this.state.id === 'new') {
-            HTTP.post(endpoint, this.state.package);
+            Services.createPackage(this.state.package);
         } else {
-            endpoint = endpoint + '/' + this.state.id;
-            HTTP.put(endpoint, this.state.package);
+            Services.updatePackage(this.state.id, this.state.package);
         }
         this.context.router.transitionTo('packages');
     },

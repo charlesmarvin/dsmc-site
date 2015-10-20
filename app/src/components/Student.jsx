@@ -1,5 +1,5 @@
 var React = require('react');
-var HTTP = require('utils/HTTP');
+var Services = require('./Services');
 var Formatters = require('utils/Formatters');
 
 var Student = React.createClass({
@@ -15,7 +15,7 @@ var Student = React.createClass({
         var {id} = this.context.router.getCurrentParams();
         if (id !== 'new') {
             this.setState({id});
-            HTTP.get('/api/v1/students/' + id, function(data) {
+            Services.getStudent(id).then(function(data) {
                 this.setState({student: data});
             }.bind(this));
         }
@@ -30,12 +30,10 @@ var Student = React.createClass({
     },
     _handleSave(event) {
         event.preventDefault();
-        var endpoint = '/api/v1/students';
         if (this.state.id === 'new') {
-            HTTP.post(endpoint, this.state.student);
+            Services.createStudent(this.state.student);
         } else {
-            endpoint = endpoint + '/' + this.state.id;
-            HTTP.put(endpoint, this.state.student);
+            Services.updateStudent(this.state.id, this.state.student);
         }
         this.context.router.transitionTo('students');
     },

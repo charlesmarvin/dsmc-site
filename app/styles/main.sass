@@ -22,42 +22,6 @@
   transition: $property $duration ease-in-out;
 }
 
-// .primary-navbar {
-//     background-color: rgb(40, 40, 40);
-//     box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-//     width: 100%;
-//     a {
-//       color: rgba(255,255,255,0.87);
-//       text-decoration: none !important;
-//       @include ease-out(background-color, 200ms);
-//       &:hover {
-//         color: rgba(255,255,255,0.87) !important;
-//         background-color: rgb(64,64,64) !important;
-//         @include ease-out(background-color, 400ms);
-//       }
-//       &:focus,
-//       &:active {
-//         color: rgba(255,255,255,0.87) !important;
-//       }
-//     }
-//     a.active {
-//       background-color: rgba(48,63,159, .6);
-//       &:hover,
-//       &:active,
-//       &:focus {
-//         background-color: rgba(48,63,159, .7) !important;
-//       }
-//     }
-//     .branding-home {
-//       a, a:active, a:hover, a:focus {
-//         text-transform: uppercase;
-//         letter-spacing: .1em;
-//         background-color: rgb(20, 20, 20) !important;
-//       }
-//     }
-// }
-// 
-
 .container {
     margin: 0 18px;
 }
@@ -87,9 +51,14 @@ nav {
         }
     }
 }
+
 #main-nav-header {
-    padding: 36px 0px 35px 0px;
+    padding: 18px 0px 36px 0px;
     margin-bottom: 18px;
+    
+    .active {
+        border-bottom: 2px solid;
+    }
 }
 
 .data-grid-toolbar {
