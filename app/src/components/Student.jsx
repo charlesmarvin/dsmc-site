@@ -39,109 +39,117 @@ var Student = React.createClass({
     },
     render() {
         return (
-            <form className="forms unit-padding" onSubmit={this._handleSave}>
-                <div className="units-row">
-                    <div className="unit-33">
+            <form className="forms" onSubmit={this._handleSave}>
+                <row>
+                    <column cols="4">
                         <label htmlFor="first-name">
-                        First Name
-                            <input id="firstName" className="width-100" type="text" 
+                        First Name</label>
+                            <input id="firstName" type="text" 
                                 value={this.state.student.firstName} 
                                 onChange={this._handleStudentFieldUpdate}/>
-                        </label>
-                    </div>
+                    </column>
 
-              <div className="unit-33">
+              <column cols="4">
                 <label htmlFor="last-name">
-                  Last Name
-                  <input id="lastName" className="width-100" type="text" 
+                  Last Name</label>
+                  <input id="lastName" type="text" 
                     value={this.state.student.lastName} 
                     onChange={this._handleStudentFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-33">
-                <div className="unit-50">
-                  <label htmlFor="dob">
-                    Date of Birth
-                    <input id="dob" className="width-100" type="date" required 
-                        value={Formatters.date(this.state.student.dob, 'YYYY-MM-DD')} 
-                        onChange={this._handleStudentFieldUpdate}/>
-                  </label>
-                </div>
-                <div className="unit-50">
-                  <label htmlFor="gender">
-                    Gender
-                    <select id="gender" className="" value={this.state.student.gender} 
-                        onChange={this._handleStudentFieldUpdate}>
-                      <option value="unknown">- Select -</option>
-                      <option value="female">Female</option>
-                      <option value="male">Male</option>
-                    </select>
-                  </label>
-                </div>
-              </div>
-            </div>
+              <column cols="4">
+                <row>
+                    <column cols="8">
+                        <row>
+                            <column cols="4">
+                                <label htmlFor="dob-year">
+                                Year</label>
+                                <input id="dob-year" type="number" required 
+                                    value={Formatters.date(this.state.student.dob, 'YYYY')} 
+                                    onChange={this._handleStudentFieldUpdate}/>
+                            </column>
+                            <column cols="4">
+                                <label htmlFor="dob-month">
+                                Month</label>
+                                <input id="dob-month" type="number" required 
+                                    value={Formatters.date(this.state.student.dob, 'MM')} 
+                                    onChange={this._handleStudentFieldUpdate}/>
+                            </column>
+                            <column cols="4">
+                                <label htmlFor="dob-day">
+                                Day</label>
+                                <input id="dob-day" type="number" required 
+                                    value={Formatters.date(this.state.student.dob, 'DD')} 
+                                    onChange={this._handleStudentFieldUpdate}/>
+                            </column>
+                        </row>
+                    </column>
+                    <column cols="4">
+                      <label htmlFor="gender">
+                        Gender</label>
+                        <select id="gender" className="" value={this.state.student.gender} 
+                            onChange={this._handleStudentFieldUpdate}>
+                          <option value="unknown">- Select -</option>
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                        </select>
+                    </column>
+                </row>
+              </column>
+            </row>
 
-            <div className="units-row">
-              <div className="unit-33">
+            <row>
+              <column cols="4">
                 <label htmlFor="email">
-                  E-Mail
-                  <input id="email" className="width-100" type="email" required 
+                  E-Mail</label>
+                  <input id="email" type="email" required 
                     value={this.state.student.email} 
                     onChange={this._handleStudentFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-33">
-                <label htmlFor="primaryPhone">
-                  Primary Phone
-                  <input id="primaryPhone" className="width-100" type="phone" 
+              <column cols="4">
+                <label htmlFor="primaryPhone">Primary Phone</label>
+                  <input id="primaryPhone" type="tel" 
                     value={this.state.student.primaryPhone} 
                     onChange={this._handleStudentFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-33">
-                <label htmlFor="secondaryPhone">
-                  Secondary Phone
-                  <input id="secondaryPhone" className="width-100" type="phone" 
+              <column cols="4">
+                <label htmlFor="secondaryPhone">Secondary Phone</label>
+                  <input id="secondaryPhone" type="tel" 
                     value={this.state.student.secondaryPhone} 
                     onChange={this._handleStudentFieldUpdate}/>
-                </label>
-              </div>
-            </div>
+              </column>
+            </row>
 
-            <div className="units-row">
-              <div className="unit-35">
+            <row>
+              <column cols="4">
                 <label htmlFor=" line1">
-                  Address 1
-                  <input id="line1" className="width-100" type="text" 
+                  Address 1</label>
+                  <input id="line1" type="text" 
                     value={this.state.student.address.line1} 
                     onChange={this._handleAddressFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-20">
+              <column cols="2">
                 <label htmlFor="line2">
-                  Address 2
-                  <input id="line2" className="width-100" type="text" 
+                  Address 2</label>
+                  <input id="line2" type="text" 
                     value={this.state.student.address.line2} 
                     onChange={this._handleAddressFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-20">
+              <column cols="2">
                 <label htmlFor="city">
-                  City
-                  <input id="city" className="width-100" type="text" 
+                  City</label>
+                  <input id="city" type="text" 
                     value={this.state.student.address.city} 
                     onChange={this._handleAddressFieldUpdate}/>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-10">
+              <column cols="1">
                 <label htmlFor="state">
-                  State
+                  State</label>
                   <select id="state" className="" value={this.state.student.address.state} 
                     onChange={this._handleAddressFieldUpdate}>
                     <option>AL</option>
@@ -150,18 +158,16 @@ var Student = React.createClass({
                     <option>NJ</option>
                     <option>PA</option>
                   </select>
-                </label>
-              </div>
+              </column>
 
-              <div className="unit-10">
+              <column cols="1">
                 <label htmlFor="zipcode">
-                  Zipcode
-                  <input id="zipcode" className="width-100" type="text" 
+                  Zipcode</label>
+                  <input id="zipcode" type="text" 
                     value={this.state.student.address.zipcode} 
                     onChange={this._handleAddressFieldUpdate}/>
-                </label>
-              </div>
-            </div>
+              </column>
+            </row>
 
             <button type="submit" className="btn btn-blue">Save</button>
           </form>
