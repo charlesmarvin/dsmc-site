@@ -56,7 +56,7 @@ var Packages = React.createClass({
     render() {
         var newEntryLink = (
             <Link to="package" params={{id: 'new'}}>
-                <i className="fa fa-user-plus"></i> New Package
+                <i className="fa fa-plus" title="Add New Package"></i>
             </Link>
         );
         return (

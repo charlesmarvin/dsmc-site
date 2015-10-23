@@ -70,7 +70,7 @@ var Students = React.createClass({
     },
     render() {
         var newEntryLink = (<Link to="student" params={{id: 'new'}}>
-                <i className="fa fa-user-plus"></i> New Student
+                <i className="fa fa-plus" title="New Student"></i>
             </Link>);
         var gridData = this._enrichStudentData(this.state.students);
         return (

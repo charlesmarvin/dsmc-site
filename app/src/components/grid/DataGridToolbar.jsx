@@ -33,7 +33,7 @@ var GridToolBar = React.createClass({
             print = (
                 <li key="print">
                     <a title="Print" data-theme="blue" data-tools="tooltip" onClick={this._handlePrint}>
-                        <i className="fa fa-print"></i> Print
+                        <i className="fa fa-print"></i> 
                       </a>
                 </li>
             );
@@ -43,7 +43,7 @@ var GridToolBar = React.createClass({
             download = (
                 <li key="download">
                     <a title="Download" data-theme="blue" data-tools="tooltip">
-                        <i className="fa fa-download"></i> Download 
+                        <i className="fa fa-download"></i>  
                     </a>
                 </li>
             );
