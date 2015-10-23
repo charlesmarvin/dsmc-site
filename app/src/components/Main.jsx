@@ -6,7 +6,7 @@ var Main = React.createClass({
     render() {
         return (
             <div className="container">
-                <header id="main-nav-header">
+                <header id="main-nav-header" className="group">
                     <nav className="left">
                         <ul>
                             <li className="branding-home"><Link to="dashboard">Driver A</Link></li>

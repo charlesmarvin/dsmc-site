@@ -21,9 +21,15 @@
   -o-transition: $property $duration ease-in-out;
   transition: $property $duration ease-in-out;
 }
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 .container {
-    margin: 0 18px;
+    border-top: 3px solid #1EBDA5;
+    padding: 0 18px;
 }
 
 .grid-toolbar-header {
@@ -32,12 +38,12 @@
 nav {
     &.left {
         li {
-            margin-right: 24px;
+            margin-right: 4px;
         }
     }
     &.right {
         li {
-            margin-left: 24px;
+            margin-left: 4px;
         }
     }
     ul {
@@ -53,11 +59,23 @@ nav {
 }
 
 #main-nav-header {
-    padding: 18px 0px 36px 0px;
-    margin-bottom: 18px;
-    
+    margin: 0 -18px 24px -18px;
+    clear: both;
     .active {
         border-bottom: 2px solid;
+    }
+    .branding-home {
+        background-color: rgb(33,211,184);
+        padding-left: 18px;
+        padding-right: 18px;
+        a {
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+    li {
+        padding: 8px 12px;
     }
 }
 
