@@ -42,7 +42,7 @@ module.exports = {
       loader: 'eslint-loader'
     }],
     loaders: [{
-      test: /\.jsx$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'react-hot!babel-loader'
     }, {
