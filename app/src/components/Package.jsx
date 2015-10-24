@@ -1,5 +1,5 @@
-var React = require('react');
-var Services = require('./Services');
+import React from 'react';
+import Services from './Services';
 
 var Package = React.createClass({
     getInitialState() {
@@ -9,7 +9,7 @@ var Package = React.createClass({
         };
     },
     componentWillMount() {
-        var {id} = this.context.router.getCurrentParams();
+        var {id} = this.props.params;
         if (id !== 'new') {
             this.setState({id});
             Services.getPackage(id).then(function(data) {
@@ -73,9 +73,5 @@ var Package = React.createClass({
         );
     }
 });
-
-Package.contextTypes = {
-    router: React.PropTypes.func.isRequired
-};
 
 module.exports = Package;

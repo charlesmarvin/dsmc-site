@@ -2,9 +2,9 @@ require('styles/main.sass');
 require('vendor/kube/kube.less');
 require('font-awesome-webpack');
 
-var React = require('react');
-var Router = require('react-router');
-var {Route, DefaultRoute, NotFoundRoute} = Router;
+import React from 'react';
+import {render} from 'react-dom';
+import {Router, Route, IndexRoute} from 'react-router';
 
 var Main = require('./Main');
 var NotFound = require('./NotFound');
@@ -15,20 +15,17 @@ var Students = require('./Students');
 var Student = require('./Student');
 var Admin = require('./Admin');
 
-var Routes = (
-    <Route handler={Main}>
-        <DefaultRoute handler={Dashboard}/>
-        <Route name="dashboard" handler={Dashboard}/>
-        <Route name="packages" handler={Packages}/>
-        <Route name="package" path="package/:id" handler={Package}/>
-        <Route name="students" handler={Students}/>
-        <Route name="student" path="student/:id" handler={Student} />
-        <Route name="instructors" handler={NotFound}/>
-        <Route name="admin" handler={Admin}/>
-        <NotFoundRoute handler={NotFound}/>
-    </Route>
-);
-
-Router.run(Routes, function(Handler) {
-    React.render(<Handler/>, document.getElementById('content'));
-});
+render((
+        <Router>
+            <Route path="/" component={Main}>
+                <IndexRoute component={Dashboard}/>
+                <Route path="packages" component={Packages}/>
+                <Route path="package" path="package/:id" component={Package}/>
+                <Route path="students" component={Students}/>
+                <Route path="student/:id" component={Student} />
+                <Route path="instructors" component={NotFound}/>
+                <Route path="admin" component={Admin}/>
+                <Route path="*" component={NotFound}/>
+            </Route>
+        </Router>
+    ), document.getElementById('content'));

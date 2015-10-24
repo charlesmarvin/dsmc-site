@@ -1,6 +1,6 @@
-var React = require('react');
-var Services = require('./Services');
-var Formatters = require('utils/Formatters');
+import React from 'react';
+import Services from './Services';
+import Formatters from 'utils/Formatters';
 
 var Student = React.createClass({
     getInitialState() {
@@ -12,7 +12,7 @@ var Student = React.createClass({
         };
     },
     componentWillMount() {
-        var {id} = this.context.router.getCurrentParams();
+        var {id} = this.props.params;
         if (id !== 'new') {
             this.setState({id});
             Services.getStudent(id).then(function(data) {
@@ -35,7 +35,7 @@ var Student = React.createClass({
         } else {
             Services.updateStudent(this.state.id, this.state.student);
         }
-        this.context.router.transitionTo('students');
+        this.context.router.transitionTo('/students');
     },
     render() {
         return (
@@ -174,9 +174,5 @@ var Student = React.createClass({
         );
     }
 });
-
-Student.contextTypes = {
-    router: React.PropTypes.func.isRequired
-};
 
 module.exports = Student;

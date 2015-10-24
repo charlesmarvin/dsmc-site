@@ -1,6 +1,6 @@
-var React = require('react');
-var Formatters = require('utils/Formatters');
-var ObjUtils = require('utils/ObjUtils');
+import React from 'react';
+import Formatters from 'utils/Formatters';
+import ObjUtils from 'utils/ObjUtils';
 
 var DataGridHeader = React.createClass({
     propTypes: {

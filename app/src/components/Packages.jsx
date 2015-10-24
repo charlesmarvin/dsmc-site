@@ -1,10 +1,9 @@
-var React = require('react');
-var DataGrid = require('components/grid/DataGrid');
-var DataGridToolbar = require('components/grid/DataGridToolbar');
-var Formatters = require('utils/Formatters');
-var Router = require('react-router');
-var {Link} = Router;
-var Services = require('./Services');
+import React from 'react';
+import DataGrid from 'components/grid/DataGrid';
+import DataGridToolbar from 'components/grid/DataGridToolbar';
+import Formatters from 'utils/Formatters';
+import {Link} from 'react-router';
+import Services from './Services';
 
 var Packages = React.createClass({
     _columnConfigs: [
@@ -12,7 +11,7 @@ var Packages = React.createClass({
             field: 'name',
             render(val, context, id) {
                 return (
-                    <Link to="package" params={{id}}>
+                    <Link to={`/package/${id}`}>
                         {val}
                     </Link>
                 );
@@ -55,7 +54,7 @@ var Packages = React.createClass({
     },
     render() {
         var newEntryLink = (
-            <Link to="package" params={{id: 'new'}}>
+            <Link to={'/package/new'}>
                 <i className="fa fa-plus" title="Add New Package"></i>
             </Link>
         );

@@ -1,6 +1,5 @@
-var React = require('react');
-var Router = require('react-router');
-var {Link} = Router;
+import React from 'react';
+import {Link} from 'react-router';
 
 var Dashboard = React.createClass({
     render() {
@@ -42,7 +41,6 @@ var Dashboard = React.createClass({
             </blocks>
         );
     }
-
 });
 
 module.exports = Dashboard;

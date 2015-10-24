@@ -1,10 +1,9 @@
-var React = require('react');
-var DataGrid = require('components/grid/DataGrid');
-var DataGridToolbar = require('components/grid/DataGridToolbar');
-var Formatters = require('utils/Formatters');
-var Services = require('./Services');
-var Router = require('react-router');
-var {RouteHandler, Link} = Router;
+import React from 'react';
+import DataGrid from 'components/grid/DataGrid';
+import DataGridToolbar from 'components/grid/DataGridToolbar';
+import Formatters from 'utils/Formatters';
+import {Link} from 'react-router';
+import Services from './Services';
 
 var Students = React.createClass({
     _columnConfigs: [
@@ -13,7 +12,7 @@ var Students = React.createClass({
             name: 'Name',
             render(val, context, id) {
                 return (
-                    <Link to="student" params={{id}} className="grid-item-edit-link">
+                    <Link to={`/student/${id}`} className="grid-item-edit-link">
                         <span className="grid-item-edit-icon"><i className="fa fa-pencil"></i></span>
                         {val} 
                     </Link>
@@ -69,13 +68,12 @@ var Students = React.createClass({
         });
     },
     render() {
-        var newEntryLink = (<Link to="student" params={{id: 'new'}}>
+        var newEntryLink = (<Link to={'/student/new'}>
                 <i className="fa fa-plus" title="New Student"></i>
             </Link>);
         var gridData = this._enrichStudentData(this.state.students);
         return (
             <div>
-                <RouteHandler/>
                 <DataGridToolbar newEntryLink={newEntryLink} filterHandler={this._handleSearch} />
                 <DataGrid data={gridData} columnConfigs={this._columnConfigs} filter={this.state.filter} />
             </div>
