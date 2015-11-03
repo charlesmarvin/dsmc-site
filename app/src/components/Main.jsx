@@ -5,15 +5,20 @@ var Main = React.createClass({
     propTypes: {
         children: React.PropTypes.node
     },
+    getInitialState() {
+        return { isOpen: false };
+    },
+    toggle(event) {
+        this.setState({ isOpen: !this.state.isOpen });
+    },
     render() {
         return (
             <div className="container">
-                <header id="main-nav-header" className="group">
-                    <nav className="left">
+                <header className="nav-header group">
+                    <Link to="/" className="brand">Driver A</Link>
+                    <a className="nav-toggle" onClick={this.toggle}><i className="fa fa-bars fa-lg"></i></a>
+                    <nav className={this.state.isOpen ? 'open' : ''}>
                         <ul>
-                            <li className="branding-home">
-                                <Link to="/">Driver A</Link>
-                            </li>
                             <li><Link to="/students">Students</Link></li>
                             <li><Link to="/packages">Packages</Link></li>
                             <li><Link to="/instructors">Instructors</Link></li>

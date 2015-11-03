@@ -1,3 +1,4 @@
+$breakpoint-small: 768px;
 @mixin ease-in($property, $duration) {
   -webkit-transition: $property $duration ease-in;
   -moz-transition: $property $duration ease-in;
@@ -32,9 +33,6 @@
     padding: 0 18px;
 }
 
-.grid-toolbar-header {
-    
-}
 nav {
     &.left {
         li {
@@ -51,32 +49,56 @@ nav {
         list-style: none;
         li {
             display: inline-block;
-            a {
-                text-decoration: none;
-            }
         }
     }
 }
 
-#main-nav-header {
+.nav-header {
+    background: #FFF;
     margin: 0 -18px 24px -18px;
     clear: both;
-    .active {
-        border-bottom: 2px solid;
-    }
-    .branding-home {
+    position: relative;
+    a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 8px 10px;
+      &.brand {
         background-color: rgb(33,211,184);
         padding-left: 18px;
         padding-right: 18px;
-        a {
-            color: #FFF;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        color: #FFF;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+    .active {
+        border-bottom: 2px solid;
+    }
+    @media (max-width: $breakpoint-small) {
+      nav {
+        text-align: center;
+        display: none;
+        li {
+          display: block;
         }
+        &.open {
+          display: block;
+        }
+      }
+      .nav-toggle {
+        display: block;
+        float: right;
+      }
     }
-    li {
-        padding: 8px 10px;
+    @media (min-width: $breakpoint-small) {
+      nav {
+        display: inline-block;
+      }
+      .nav-toggle {
+        display: none;
+      }
     }
+    
 }
 
 .data-grid-toolbar {
