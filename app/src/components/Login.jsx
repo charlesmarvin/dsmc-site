@@ -72,7 +72,7 @@ export default class Login extends React.Component {
     
     render() {
         var requiredError = <span className="error">Required</span>;
-        var usernameError = (this.state.hasUsernameError) ?  requiredError : '';
+        var usernameError = (this.state.hasUsernameError) ? requiredError : '';
         var passwordError = (this.state.hasPasswordError) ? requiredError : '';
         var loginError = (this.state.hasLoginError) ? <span className="error">Login failed</span> : '';
         return (
