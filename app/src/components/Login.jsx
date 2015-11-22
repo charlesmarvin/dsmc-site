@@ -44,10 +44,7 @@ export default class Login extends React.Component {
         });
         
         Services.login(this.state.username, this.state.password)
-            .then(function(d) {
-                console.log('successfully logged in as ' + this.state.username);
-            },
-            function(e) {
+            .catch(function(e) {
                 console.log('login error: ' + e);
                 this.setState({hasLoginError: true});
             }.bind(this));

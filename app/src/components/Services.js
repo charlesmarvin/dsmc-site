@@ -1,66 +1,88 @@
-import {get, post, patch} from 'utils/HTTP';
 import LoginActions from '../actions/LoginActions';
+import LoginStore from '../stores/LoginStore';
 
 const host = (document.location.hostname === 'localhost') ? 'http://localhost:8080' 
     : 'http://dsmc-api.cfapps.io';
 const API_CONTEXT = host + '/api/';
 const SECURE_API_CONTEXT = API_CONTEXT + 's/';
+const JSON_HEADERS = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+};
+const TO_JSON = function(response) {
+    return response.json();
+};
+
+function r(method, url, data) {
+    var headers = Object.assign({}, JSON_HEADERS);
+    if (LoginStore.jwt) {
+        Object.assign(headers, {Authorization: 'Bearer ' + LoginStore.jwt});
+    }
+    var options = {
+        method,
+        headers
+    };
+    if (data) {
+        options.body = JSON.stringify(data);
+    }
+    return fetch(url, options).then(TO_JSON);
+}
 
 export default {
     getStudents() {
-        return get(SECURE_API_CONTEXT + 'students');
+        return r('get', SECURE_API_CONTEXT + 'students');
     },
     
     getStudent(id) {
-        return get(SECURE_API_CONTEXT + 'students/' + id);
+        return r('get', SECURE_API_CONTEXT + 'students/' + id);
     },
     
     createStudent(student) {
-        return post(SECURE_API_CONTEXT + 'students', student);
+        return r('post', SECURE_API_CONTEXT + 'students', student);
     },
     
     updateStudent(id, student) {
-        return patch(SECURE_API_CONTEXT + 'students/' + id, student);
+        return r('patch', SECURE_API_CONTEXT + 'students/' + id, student);
     },
     
     getInstructors() {
-        return get(SECURE_API_CONTEXT + 'instructors');
+        return r('get', SECURE_API_CONTEXT + 'instructors');
     },
     
     getInstructor(id) {
-        return get(SECURE_API_CONTEXT + 'instructors/' + id);
+        return r('get', SECURE_API_CONTEXT + 'instructors/' + id);
     },
     
     createInstructor(instructor) {
-        return post(SECURE_API_CONTEXT + 'instructors', instructor);
+        return r('post', SECURE_API_CONTEXT + 'instructors', instructor);
     },
     
     updateInstructor(id, instructor) {
-        return patch(SECURE_API_CONTEXT + 'instructors/' + id, instructor);
+        return r('patch', SECURE_API_CONTEXT + 'instructors/' + id, instructor);
     },
     
     getPackages() {
-        return get(SECURE_API_CONTEXT + 'packages');
+        return r('get', SECURE_API_CONTEXT + 'packages');
     },
     
     getPackage(id) {
-        return get(SECURE_API_CONTEXT + 'packages/' + id);
+        return r('get', SECURE_API_CONTEXT + 'packages/' + id);
     },
     
     createPackage(pkg) {
-        return post(SECURE_API_CONTEXT + 'packages', pkg);
+        return r('post', SECURE_API_CONTEXT + 'packages', pkg);
     },
     
     updatePackage(id, pkg) {
-        return patch(SECURE_API_CONTEXT + 'packages/' + id, pkg);
+        return r('patch', SECURE_API_CONTEXT + 'packages/' + id, pkg);
     },
     
     getDashboardContent() {
-        return get(SECURE_API_CONTEXT + 'dashboard');
+        return r('get', SECURE_API_CONTEXT + 'dashboard');
     },
     
     login(username, password) {
-        return post(API_CONTEXT + 'login', {username, password}).then(function(res) {
+        return r('post', API_CONTEXT + 'login', {username, password}).then(function(res) {
             LoginActions.loginUser(res.jwt);
             return true;
         });
