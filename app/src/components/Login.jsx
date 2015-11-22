@@ -86,7 +86,7 @@ export default class Login extends React.Component {
                     <input type="password" onChange={this.handlePasswordChange}/>
                 </section>
                 <section>
-                    <button type="primary">Log in</i></button>
+                    <button type="primary">Log in</button>
                     <p>{loginError}</p>
                 </section>
             </form>
