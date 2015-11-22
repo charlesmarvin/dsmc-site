@@ -9,58 +9,86 @@ export default class Login extends React.Component {
             stayLoggedIn: false,
             username: '',
             password: '',
-            remember: ''
+            hasUsernameError: false,
+            hasPasswordError: false,
+            hasLoginError: false
         };
+        this.isLoginFormValid = this.isLoginFormValid.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
     
+    isLoginFormValid() {
+        var isValid = true;
+        if (!this.state.username.trim()) {
+            this.setState({hasUsernameError: true});
+            isValid = false;
+        } 
+        if (!this.state.password.trim()) {
+            this.setState({hasPasswordError: true});
+            isValid = false;
+        }
+        return isValid;
+    }
+
     handleSubmit(e) {
         e.preventDefault();
-        if (!this.state.username.trim() || !this.state.password.trim()) {
-            //show warning and return
+        if (!this.isLoginFormValid()) {
             return;
         }
+        this.setState({
+            hasUsernameError: false,
+            hasPasswordError: false,
+            hasLoginError: false
+        });
+        
         Services.login(this.state.username, this.state.password)
             .then(function(d) {
-                console.log('success ' + d);
+                console.log('successfully logged in as ' + this.state.username);
             },
             function(e) {
-                console.log('error ' + e);
-            });
+                console.log('login error: ' + e);
+                this.setState({hasLoginError: true});
+            }.bind(this));
     }
     
     handleUsernameChange(event) {
-        this.setState({username: event.target.value});
+
+        this.setState({
+            hasUsernameError: false,
+            hasLoginError: false,
+            username: event.target.value
+        });
     }
     
     handlePasswordChange(event) {
-        this.setState({password: event.target.value});
-    }
-    
-    handlePersistLoginChange(event) {
-        this.setState({remember: event.target.checked});
+        this.setState({
+            hasPasswordError: false,
+            hasLoginError: false,
+            password: event.target.value
+        });
     }
     
     render() {
+        var requiredError = <span className="error">Required</span>;
+        var usernameError = (this.state.hasUsernameError) ?  requiredError : '';
+        var passwordError = (this.state.hasPasswordError) ? requiredError : '';
+        var loginError = (this.state.hasLoginError) ? <span className="error">Login failed</span> : '';
         return (
-            <form className="forms login-form" onSubmit={this.handleSubmit.bind(this)}>
-                <row>
-                    <column cols="4">
-                        <label>Username</label>
-                        <input type="text" onChange={this.handleUsernameChange.bind(this)}/>
-                    </column>
-                    <column cols="4">
-                        <label>Password</label>
-                        <input type="password" onChange={this.handlePasswordChange.bind(this)}/>
-                    </column>
-                    <column>
-                        <label>&nbsp;</label>
-                        <button type="primary">Log in</button>
-                    </column>
-                </row>
-                <label className="checkbox">
-                    <input type="checkbox" onChange={this.handlePersistLoginChange.bind(this)}/> 
-                    Keep me logged in
-                </label>
+            <form className="forms login-form width-6" onSubmit={this.handleSubmit}>
+                <section>
+                    <label>Username {usernameError}</label>
+                    <input type="text" onChange={this.handleUsernameChange}/>
+                </section>
+                <section>
+                    <label>Password {passwordError}</label>
+                    <input type="password" onChange={this.handlePasswordChange}/>
+                </section>
+                <section>
+                    <button type="primary">Log in</i></button>
+                    <p>{loginError}</p>
+                </section>
             </form>
         );
     }
