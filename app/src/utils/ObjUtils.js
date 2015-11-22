@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     deepGet(obj, key) {
         return key.split('.').reduce(function(o, k) {
             return (typeof o === 'undefined' || o === null) ? o : o[k];

@@ -1,51 +1,72 @@
 import {get, post, patch} from 'utils/HTTP';
-var SERVICE_PATH = 'http://dsmc-api.cfapps.io/api/v1/';
+import LoginActions from '../actions/LoginActions';
 
-module.exports = {
+const host = (document.location.hostname === 'localhost') ? 'http://localhost:8080' 
+    : 'http://dsmc-api.cfapps.io';
+const API_CONTEXT = host + '/api/';
+const SECURE_API_CONTEXT = API_CONTEXT + 's/';
+
+export default {
     getStudents() {
-        return get(SERVICE_PATH + 'students');
+        return get(SECURE_API_CONTEXT + 'students');
     },
     
     getStudent(id) {
-        return get(SERVICE_PATH + 'students/' + id);
+        return get(SECURE_API_CONTEXT + 'students/' + id);
     },
     
     createStudent(student) {
-        return post(SERVICE_PATH + 'students', student);
+        return post(SECURE_API_CONTEXT + 'students', student);
     },
     
     updateStudent(id, student) {
-        return patch(SERVICE_PATH + 'students/' + id, student);
+        return patch(SECURE_API_CONTEXT + 'students/' + id, student);
     },
     
     getInstructors() {
-        return get(SERVICE_PATH + 'instructors');
+        return get(SECURE_API_CONTEXT + 'instructors');
     },
     
     getInstructor(id) {
-        return get(SERVICE_PATH + 'instructors/' + id);
+        return get(SECURE_API_CONTEXT + 'instructors/' + id);
     },
     
     createInstructor(instructor) {
-        return post(SERVICE_PATH + 'instructors', instructor);
+        return post(SECURE_API_CONTEXT + 'instructors', instructor);
     },
     
     updateInstructor(id, instructor) {
-        return patch(SERVICE_PATH + 'instructors/' + id, instructor);
+        return patch(SECURE_API_CONTEXT + 'instructors/' + id, instructor);
     },
     
     getPackages() {
-        return get(SERVICE_PATH + 'packages');
+        return get(SECURE_API_CONTEXT + 'packages');
     },
+    
     getPackage(id) {
-        return get(SERVICE_PATH + 'packages/' + id);
+        return get(SECURE_API_CONTEXT + 'packages/' + id);
     },
     
     createPackage(pkg) {
-        return post(SERVICE_PATH + 'packages', pkg);
+        return post(SECURE_API_CONTEXT + 'packages', pkg);
     },
     
     updatePackage(id, pkg) {
-        return patch(SERVICE_PATH + 'packages/' + id, pkg);
+        return patch(SECURE_API_CONTEXT + 'packages/' + id, pkg);
+    },
+    
+    getDashboardContent() {
+        return get(SECURE_API_CONTEXT + 'dashboard');
+    },
+    
+    login(username, password) {
+        return post(API_CONTEXT + 'login', {username, password}).then(function(res) {
+            LoginActions.loginUser(res.jwt);
+            return true;
+        });
+    },
+    
+    logout() {
+        LoginActions.logoutUser();
     }
 };

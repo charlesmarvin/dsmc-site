@@ -2,15 +2,17 @@ import React from 'react';
 import Services from './Services';
 import Formatters from 'utils/Formatters';
 
-var Student = React.createClass({
-    getInitialState() {
-        return {
+export default class Student extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             id: 'new',
             student: { 
                 address: {}
             }
         };
-    },
+    }
+    
     componentWillMount() {
         var {id} = this.props.params;
         if (id !== 'new') {
@@ -19,15 +21,18 @@ var Student = React.createClass({
                 this.setState({student: data});
             }.bind(this));
         }
-    },
+    }
+    
     _handleStudentFieldUpdate(event) {
         this.state.student[event.target.id] = event.target.value; 
         this.setState({student: this.state.student});
-    },
+    }
+    
     _handleAddressFieldUpdate(event) {
         this.state.student.address[event.target.id] = event.target.value; 
         this.setState({student: this.state.student});
-    },
+    }
+    
     _handleSave(event) {
         event.preventDefault();
         if (this.state.id === 'new') {
@@ -36,7 +41,8 @@ var Student = React.createClass({
             Services.updateStudent(this.state.id, this.state.student);
         }
         this.context.router.transitionTo('/students');
-    },
+    }
+    
     render() {
         return (
             <form className="forms" onSubmit={this._handleSave}>
@@ -173,6 +179,8 @@ var Student = React.createClass({
           </form>
         );
     }
-});
+}
 
-module.exports = Student;
+Student.propTypes = {
+    params: React.PropTypes.object.isRequired
+};

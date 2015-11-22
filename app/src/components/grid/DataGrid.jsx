@@ -2,16 +2,11 @@ import React from 'react';
 import Formatters from 'utils/Formatters';
 import ObjUtils from 'utils/ObjUtils';
 
-var DataGridHeader = React.createClass({
-    propTypes: {
-        columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
-            field: React.PropTypes.string.isRequired,
-            name: React.PropTypes.string,
-            format: React.PropTypes.func,
-            renderHeader: React.PropTypes.func,
-            enabled: React.PropTypes.bool
-        })).isRequired
-    },
+class DataGridHeader extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         var trs = this.props.columnConfigs
             .filter(function(config) {
@@ -39,27 +34,23 @@ var DataGridHeader = React.createClass({
             </thead>
         );
     }
-});
+}
 
-var DataGridRow = React.createClass({
-    propTypes: {
-        rowId: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.number
-        ]).isRequired,
-        rowData: React.PropTypes.object.isRequired,
-        columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
-            field: React.PropTypes.string.isRequired,
-            format: React.PropTypes.func,
-            render: React.PropTypes.func,
-            enabled: React.PropTypes.bool
-        })).isRequired
-    },
-    getDefaultProps() {
-        return {
-            rowData: []
-        };
-    },
+DataGridHeader.propTypes = {
+    columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
+        field: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string,
+        format: React.PropTypes.func,
+        renderHeader: React.PropTypes.func,
+        enabled: React.PropTypes.bool
+    })).isRequired
+};
+
+class DataGridRow extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         var tds = this.props.columnConfigs
             .filter(function(config) {
@@ -85,18 +76,30 @@ var DataGridRow = React.createClass({
             </tr>
         );
     }
-});
+}
 
-var DataGridBody = React.createClass({
-    propTypes: {
-        data: React.PropTypes.array.isRequired,
-        columnConfigs: React.PropTypes.array.isRequired
-    },
-    getDefaultProps() {
-        return {
-            data: []
-        };
-    },
+DataGridRow.defaultProps = {
+    rowData: []
+};
+DataGridRow.propTypes = {
+    rowId: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+    ]).isRequired,
+    rowData: React.PropTypes.object.isRequired,
+    columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
+        field: React.PropTypes.string.isRequired,
+        format: React.PropTypes.func,
+        render: React.PropTypes.func,
+        enabled: React.PropTypes.bool
+    })).isRequired
+};
+
+class DataGridBody extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         var trs = this.props.data.map(function(row, idx) {
             return (<DataGridRow key={idx} rowId={row.id} rowData={row} 
@@ -108,19 +111,22 @@ var DataGridBody = React.createClass({
             </tbody>
         );
     }
-});
+}
 
-var DataGrid = React.createClass({
-    propTypes: {
-        filter: React.PropTypes.string,
-        data: React.PropTypes.array.isRequired,
-        columnConfigs: React.PropTypes.array.isRequired 
-    },
-    getDefaultProps() {
-        return {
-            filter: ''
-        };
-    },
+DataGridBody.defaultProps = {
+    rowData: []
+};
+
+DataGridBody.propTypes = {
+    data: React.PropTypes.array.isRequired,
+    columnConfigs: React.PropTypes.array.isRequired
+};
+
+export default class DataGrid extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     render() {
         var filterFn = ObjUtils.deepfilterFactory(this.props.filter, ['_id', 'guid']);
         var gridData = (this.props.filter.length) ? this.props.data.filter(filterFn) : this.props.data;
@@ -132,6 +138,14 @@ var DataGrid = React.createClass({
             </table>
         );
     }
-});
+}
 
-module.exports = DataGrid;
+DataGrid.defaultProps = {
+    filter: ''
+};
+    
+DataGrid.propTypes = {
+    filter: React.PropTypes.string,
+    data: React.PropTypes.array.isRequired,
+    columnConfigs: React.PropTypes.array.isRequired 
+};

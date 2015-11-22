@@ -1,11 +1,9 @@
 import React from 'react';
 
-var NotFound = React.createClass({
+export default class NotFound extends React.Component {
     render() {
         return (
             <div>The resource you requested could not be found</div>
         );
     }
-});
-
-module.exports = NotFound;
+}

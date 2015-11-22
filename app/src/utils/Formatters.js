@@ -3,7 +3,7 @@ var PNF = libphonenumber.phonenumbers.PhoneNumberFormat;
 var phoneUtil = libphonenumber.phonenumbers.PhoneNumberUtil.getInstance();
 var moment = require('moment');
 
-module.exports = {
+export default {
     phoneNumber(number) {
         try {
             var phoneNumber = phoneUtil.parseAndKeepRawInput(number, 'US');

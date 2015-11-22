@@ -1,32 +1,21 @@
 import React from 'react';
 
-var GridToolBar = React.createClass({
-    propTypes: {
-        filterHandler: React.PropTypes.func.isRequired,
-        newEntryLink: React.PropTypes.object.isRequired,
-        enablePrint: React.PropTypes.bool,
-        enableDownload: React.PropTypes.bool,
-        enableFilter: React.PropTypes.bool,
-        enableAdd: React.PropTypes.bool
-    },
-    getDefaultProps() {
-        return {
-            enablePrint: true,
-            enableDownload: true,
-            enableFilter: true,
-            enableAdd: true,
-            filterHandler() {} //no-op filter handler
-        };
-    },
+export default class GridToolBar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     _handleSearch(event) {
         event.preventDefault();
         var searchText = React.findDOMNode(this.refs.searchInput).value.trim();
         this.props.filterHandler(searchText);
-    },
+    }
+    
     _handlePrint(event) {
         event.preventDefault();
         window.print();
-    },
+    }
+    
     render() {
         var print = '';
         if (this.props.enablePrint) {
@@ -78,6 +67,21 @@ var GridToolBar = React.createClass({
             </header>
         );
     }
-});
+}
 
-module.exports = GridToolBar;
+GridToolBar.propTypes = {
+    filterHandler: React.PropTypes.func.isRequired,
+    newEntryLink: React.PropTypes.object.isRequired,
+    enablePrint: React.PropTypes.bool,
+    enableDownload: React.PropTypes.bool,
+    enableFilter: React.PropTypes.bool,
+    enableAdd: React.PropTypes.bool
+};
+
+GridToolBar.defaultProps = {
+    enablePrint: true,
+    enableDownload: true,
+    enableFilter: true,
+    enableAdd: true,
+    filterHandler() {} //no-op filter handler
+};

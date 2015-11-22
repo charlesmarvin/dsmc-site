@@ -3,29 +3,50 @@ require('vendor/kube/kube.less');
 require('font-awesome-webpack');
 
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute} from 'react-router';
+import RouterContainer from '../services/RouterContainer';
+import LoginActions from '../actions/LoginActions';
+import LoginStore from '../stores/LoginStore';
+import History from 'utils/History';
 
-var Main = require('./Main');
-var NotFound = require('./NotFound');
-var Dashboard = require('./Dashboard');
-var Packages = require('./Packages');
-var Package = require('./Package');
-var Students = require('./Students');
-var Student = require('./Student');
-var Admin = require('./Admin');
+const Main = require('./Main');
+const NotFound = require('./NotFound');
+const Dashboard = require('./Dashboard');
+const Packages = require('./Packages');
+const Package = require('./Package');
+const Students = require('./Students');
+const Student = require('./Student');
+const Admin = require('./Admin');
+const Login = require('./Login');
 
-render((
-        <Router>
-            <Route path="/" component={Main}>
-                <IndexRoute component={Dashboard}/>
-                <Route path="packages" component={Packages}/>
-                <Route path="package" path="package/:id" component={Package}/>
-                <Route path="students" component={Students}/>
-                <Route path="student/:id" component={Student} />
-                <Route path="instructors" component={NotFound}/>
-                <Route path="admin" component={Admin}/>
-                <Route path="*" component={NotFound}/>
-            </Route>
-        </Router>
-    ), document.getElementById('content'));
+var router = (
+    <Router history={History}>
+        <Route path="/" component={Main}>
+            <IndexRoute component={Dashboard} onEnter={requireAuth}/>
+            <Route path="packages" component={Packages} onEnter={requireAuth}/>
+            <Route path="package" path="package/:id" component={Package} onEnter={requireAuth}/>
+            <Route path="students" component={Students} onEnter={requireAuth}/>
+            <Route path="student/:id" component={Student} onEnter={requireAuth}/>
+            <Route path="instructors" component={NotFound} onEnter={requireAuth}/>
+            <Route path="admin" component={Admin} onEnter={requireAuth}/>
+            <Route path="login" component={Login}/>
+            <Route path="*" component={NotFound}/>
+        </Route>
+    </Router>
+);
+
+function requireAuth(nextState, replaceState) {
+    if (!LoginStore.isLoggedIn) {
+        replaceState({nextPathname: nextState.location.pathname}, '/login');
+    }
+}
+
+RouterContainer.set(router);
+
+let jwt = localStorage.getItem('jwt');
+if (jwt) {
+    LoginActions.loginUser(jwt);
+}
+
+ReactDOM.render(router, document.getElementById('content'));

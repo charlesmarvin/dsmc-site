@@ -1,13 +1,10 @@
 import React from 'react';
 
-var Admin = React.createClass({
+export default class Admin extends React.Component {
     render() {
         return (
             <div className="units-row">
             </div>
         );
     }
-
-});
-
-module.exports = Admin;
+}

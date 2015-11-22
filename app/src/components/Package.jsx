@@ -1,13 +1,15 @@
 import React from 'react';
 import Services from './Services';
 
-var Package = React.createClass({
-    getInitialState() {
-        return {
+export default class Package extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             id: 'new',
             package: {}
         };
-    },
+    }
+    
     componentWillMount() {
         var {id} = this.props.params;
         if (id !== 'new') {
@@ -16,12 +18,14 @@ var Package = React.createClass({
                 this.setState({package: data});
             }.bind(this));
         }
-    },
+    }
+    
     _handlePackageFieldUpdate(event) {
         this.state.package[event.target.id] = (event.target.type === 'checkbox') ? 
             event.target.checked : event.target.value;
         this.setState({package: this.state.package});
-    },
+    }
+    
     _handleSave(event) {
         event.preventDefault();
         if (this.state.id === 'new') {
@@ -30,7 +34,8 @@ var Package = React.createClass({
             Services.updatePackage(this.state.id, this.state.package);
         }
         this.context.router.transitionTo('packages');
-    },
+    }
+    
     render() {
         return (
              <form className="forms unit-padding" onSubmit={this._handleSave}>
@@ -72,6 +77,15 @@ var Package = React.createClass({
             </form>
         );
     }
-});
+}
 
-module.exports = Package;
+Package.propTypes = {
+    params: React.PropTypes.object.isRequired,
+    columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
+        field: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string,
+        format: React.PropTypes.func,
+        renderHeader: React.PropTypes.func,
+        enabled: React.PropTypes.bool
+    })).isRequired
+};
