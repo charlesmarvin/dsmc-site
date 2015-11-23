@@ -30,7 +30,6 @@ export default class Dashboard extends React.Component {
     render() {
         var config = {
             chart: {
-                type: 'pie',
                 height: 144
             },
             title: {
@@ -40,10 +39,14 @@ export default class Dashboard extends React.Component {
                 enabled: false
             },
             series: [{
+                name: 'Students',
+                type: 'pie',
                 innerSize: '75%',
+                dataLabels: {
+                    distance: 5
+                },
                 colors: [
                     '#C83737',
-                    
                     '#2F4986',
                     '#C87937',
                     '#9467bd',
