@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './app/src/components/App.jsx',
+  entry: './src/app/components/App.jsx',
 
   stats: {
     colors: true,
@@ -41,10 +41,10 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-        'vendor': __dirname + '/app/vendor',
-        'styles': __dirname + '/app/styles',
-        'components': __dirname + '/app/src/components',
-        'utils': __dirname + '/app/src/utils'
+        'vendor': __dirname + '/src/vendor',
+        'styles': __dirname + '/src/styles',
+        'components': __dirname + '/src/app/components',
+        'utils': __dirname + '/src/app/utils'
     }
   },
 

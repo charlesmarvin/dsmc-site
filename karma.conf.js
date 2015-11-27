@@ -38,9 +38,9 @@ module.exports = function (config) {
       },
       resolve: {
         alias: {
-          'styles': path.join(process.cwd(), './app/styles'),
-          'components': path.join(process.cwd(), './app/scripts/components'),
-          'vendor': path.join(process.cwd(), './app/vendor')
+          'styles': path.join(process.cwd(), './src/styles'),
+          'components': path.join(process.cwd(), './src/app/components'),
+          'vendor': path.join(process.cwd(), './src/vendor')
         }
       }
     },
