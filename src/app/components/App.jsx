@@ -44,9 +44,6 @@ function requireAuth(nextState, replaceState) {
 
 RouterContainer.set(router);
 
-let jwt = localStorage.getItem('jwt');
-if (jwt) {
-    LoginActions.loginUser(jwt);
-}
+LoginActions.authenticateFromToken();
 
 ReactDOM.render(router, document.getElementById('content'));

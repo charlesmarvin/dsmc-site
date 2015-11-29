@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Services from './Services';
+import LoginActions from '../actions/LoginActions';
+import LoginStore from '../stores/LoginStore';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -11,12 +12,29 @@ export default class Login extends React.Component {
             password: '',
             hasUsernameError: false,
             hasPasswordError: false,
-            hasLoginError: false
+            hasLoginError: false,
+            loading: false
         };
         this.isLoginFormValid = this.isLoginFormValid.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this._onAuthStateChanged = this._onAuthStateChanged.bind(this);
+    }
+
+    componentDidMount() {
+        LoginStore.addChangeListener(this._onAuthStateChanged);
+    }
+    
+    componentWillUnmount() {
+        LoginStore.removeChangeListener(this._onAuthStateChanged);
+    }
+
+    _onAuthStateChanged() {
+        this.setState({
+            hasLoginError: LoginStore.hasError,
+            loading: LoginStore.isLoading
+        });
     }
     
     isLoginFormValid() {
@@ -43,15 +61,10 @@ export default class Login extends React.Component {
             hasLoginError: false
         });
         
-        Services.login(this.state.username, this.state.password)
-            .catch(function(e) {
-                console.log('login error: ' + e);
-                this.setState({hasLoginError: true});
-            }.bind(this));
+        LoginActions.loginUser(this.state.username, this.state.password);
     }
     
     handleUsernameChange(event) {
-
         this.setState({
             hasUsernameError: false,
             hasLoginError: false,
@@ -72,6 +85,7 @@ export default class Login extends React.Component {
         var usernameError = (this.state.hasUsernameError) ? requiredError : '';
         var passwordError = (this.state.hasPasswordError) ? requiredError : '';
         var loginError = (this.state.hasLoginError) ? <span className="error">Login failed</span> : '';
+        var loading = (this.state.loading) ? <i className="fa fa-spinner"></i> : '';
         return (
             <form className="forms login-form width-6" onSubmit={this.handleSubmit}>
                 <section>
@@ -83,7 +97,7 @@ export default class Login extends React.Component {
                     <input type="password" onChange={this.handlePasswordChange}/>
                 </section>
                 <section>
-                    <button type="primary">Log in</button>
+                    <button type="primary">Log in {loading}</button>
                     <p>{loginError}</p>
                 </section>
             </form>

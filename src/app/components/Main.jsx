@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import LoginStore from '../stores/LoginStore';
+import LoginActions from '../actions/LoginActions';
 import Services from './Services';
 
 export default class Main extends React.Component {
@@ -11,27 +12,28 @@ export default class Main extends React.Component {
             isLoggedIn: LoginStore.isLoggedIn
         };
         this._onChange = this._onChange.bind(this);
+        this._toggleNav = this._toggleNav.bind(this);
     }
     
     componentDidMount() {
         LoginStore.addChangeListener(this._onChange);
     }
     
+    componentWillUnmount() {
+        LoginStore.removeChangeListener(this._onChange);
+    }
+
     _onChange() {
         this.setState({isLoggedIn: LoginStore.isLoggedIn});
     }
     
-    componentWillUnmount() {
-        LoginStore.removeChangeListener(this._onChange);
-    }
-    
-    toggle(event) {
+    _toggleNav(event) {
         this.setState({isOpen: !this.state.isOpen});
     }
     
-    logout(event) {
+    _logout(event) {
         event.preventDefault();
-        Services.logout();
+        LoginActions.logoutUser();
     }
     
     render() {
@@ -41,7 +43,7 @@ export default class Main extends React.Component {
                 <li><Link to="/packages">Packages</Link></li>
                 <li><Link to="/instructors">Instructors</Link></li>
                 <li><Link to="/admin">Admin</Link></li>
-                <li><a onClick={this.logout}>Logout</a></li>
+                <li><a onClick={this._logout}>Logout</a></li>
             </ul>)
             : 
             (<ul>
@@ -51,7 +53,9 @@ export default class Main extends React.Component {
             <div className="container">
                 <header className="nav-header group">
                     <Link to="/" className="brand">Driver A</Link>
-                    <a className="nav-toggle" onClick={this.toggle}><i className="fa fa-bars fa-lg"></i></a>
+                    <a className="nav-toggle" onClick={this._toggleNav}>
+                        <i className="fa fa-bars fa-lg"></i>
+                    </a>
                     <nav className={this.state.isOpen ? 'open' : ''}>
                         {links}
                     </nav>
