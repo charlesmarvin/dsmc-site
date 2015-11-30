@@ -43,7 +43,7 @@ export default class Dashboard extends React.Component {
                 type: 'pie',
                 innerSize: '75%',
                 dataLabels: {
-                    distance: 5
+                    distance: 1
                 },
                 colors: [
                     '#C83737',
