@@ -7,10 +7,10 @@ export default class Student extends React.Component {
         super(props);
         this.state = {
             id: 'new',
-            student: { 
-                address: {}
-            }
+            student: {}
         };
+        this._handleStudentFieldUpdate = this._handleStudentFieldUpdate.bind(this);
+        this._handleSave = this._handleSave.bind(this);
     }
     
     componentWillMount() {
@@ -25,11 +25,6 @@ export default class Student extends React.Component {
     
     _handleStudentFieldUpdate(event) {
         this.state.student[event.target.id] = event.target.value; 
-        this.setState({student: this.state.student});
-    }
-    
-    _handleAddressFieldUpdate(event) {
-        this.state.student.address[event.target.id] = event.target.value; 
         this.setState({student: this.state.student});
     }
     
@@ -66,38 +61,19 @@ export default class Student extends React.Component {
               <column cols="4">
                 <row>
                     <column cols="8">
-                        <row>
-                            <column cols="4">
-                                <label htmlFor="dob-year">
-                                Year</label>
-                                <input id="dob-year" type="number" required 
-                                    value={Formatters.date(this.state.student.dob, 'YYYY')} 
-                                    onChange={this._handleStudentFieldUpdate}/>
-                            </column>
-                            <column cols="4">
-                                <label htmlFor="dob-month">
-                                Month</label>
-                                <input id="dob-month" type="number" required 
-                                    value={Formatters.date(this.state.student.dob, 'MM')} 
-                                    onChange={this._handleStudentFieldUpdate}/>
-                            </column>
-                            <column cols="4">
-                                <label htmlFor="dob-day">
-                                Day</label>
-                                <input id="dob-day" type="number" required 
-                                    value={Formatters.date(this.state.student.dob, 'DD')} 
-                                    onChange={this._handleStudentFieldUpdate}/>
-                            </column>
-                        </row>
+                      <label htmlFor="dob">Date of Birth</label>
+                      <input id="dob" type="text" required 
+                        value={this.state.student.dob} 
+                        onChange={this._handleStudentFieldUpdate}/>
                     </column>
                     <column cols="4">
                       <label htmlFor="gender">
                         Gender</label>
                         <select id="gender" className="" value={this.state.student.gender} 
                             onChange={this._handleStudentFieldUpdate}>
-                          <option value="unknown">- Select -</option>
-                          <option value="female">Female</option>
-                          <option value="male">Male</option>
+                          <option value="">- Select -</option>
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
                         </select>
                     </column>
                 </row>
@@ -133,31 +109,31 @@ export default class Student extends React.Component {
                 <label htmlFor=" line1">
                   Address 1</label>
                   <input id="line1" type="text" 
-                    value={this.state.student.address.line1} 
-                    onChange={this._handleAddressFieldUpdate}/>
+                    value={this.state.student.addressLine1} 
+                    onChange={this._handleStudentFieldUpdate}/>
               </column>
 
               <column cols="2">
                 <label htmlFor="line2">
                   Address 2</label>
                   <input id="line2" type="text" 
-                    value={this.state.student.address.line2} 
-                    onChange={this._handleAddressFieldUpdate}/>
+                    value={this.state.student.addressLine2} 
+                    onChange={this._handleStudentFieldUpdate}/>
               </column>
 
               <column cols="2">
                 <label htmlFor="city">
                   City</label>
                   <input id="city" type="text" 
-                    value={this.state.student.address.city} 
-                    onChange={this._handleAddressFieldUpdate}/>
+                    value={this.state.student.city} 
+                    onChange={this._handleStudentFieldUpdate}/>
               </column>
 
               <column cols="1">
                 <label htmlFor="state">
                   State</label>
-                  <select id="state" className="" value={this.state.student.address.state} 
-                    onChange={this._handleAddressFieldUpdate}>
+                  <select id="state" className="" value={this.state.student.state} 
+                    onChange={this._handleStudentFieldUpdate}>
                     <option>AL</option>
                     <option>CA</option>
                     <option>NY</option>
@@ -170,8 +146,8 @@ export default class Student extends React.Component {
                 <label htmlFor="zipcode">
                   Zipcode</label>
                   <input id="zipcode" type="text" 
-                    value={this.state.student.address.zipcode} 
-                    onChange={this._handleAddressFieldUpdate}/>
+                    value={this.state.student.zipcode} 
+                    onChange={this._handleStudentFieldUpdate}/>
               </column>
             </row>
 

@@ -1,7 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher.js';
 import {LOGIN_SUCCESS, LOGOUT_USER, LOGIN_FAILURE, LOGIN_REQUESTED} from '../constants/LoginConstants.js';
-import {API_CONTEXT, JSON_HEADERS} from '../constants/AppConstants.js';
-import RouterContainer from '../services/RouterContainer';
+import {API_CONTEXT} from '../constants/AppConstants.js';
 import History from 'utils/History';
 import {post} from 'utils/JsonFetch';
 function navigateOnAuthentication() {
