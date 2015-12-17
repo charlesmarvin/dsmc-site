@@ -1,70 +1,102 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
+import _ from 'lodash';
 import Highcharts from 'react-highcharts/dist/bundle/highcharts';
-import Services from './Services';
+import DashboardActions from '../actions/DashboardActions';
+import DashboardStore from '../stores/DashboardStore';
+
+const baseChartConfig = {
+    chart: {
+        height: 144
+    },
+    title: {
+        text: null
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Students',
+        type: 'pie',
+        innerSize: '75%',
+        dataLabels: {
+            distance: 1
+        },
+        colors: [
+            '#C83737',
+            '#2F4986',
+            '#C87937',
+            '#9467bd',
+            '#8c564b',
+            '#e377c2',
+            '#7f7f7f',
+            '#217878',
+            '#bcbd22',
+            '#17becf'
+        ],
+        data: []
+    }]
+};
 
 export default class Dashboard extends React.Component {
-    componentWillMount() {
-        var agg = {male: 0, female: 0};
-        Services.getDashboardContent().then(function(d) {
-            let studentsByGender = d.studentsByGenderCount;
-            let studentsByGenderChart = this.refs.studentsByGenderChart.getChart();
-            studentsByGenderChart.series[0].addPoint({name: 'Men', y: studentsByGender.M});
-            studentsByGenderChart.series[0].addPoint({name: 'Women', y: studentsByGender.F});
-            
-            let studentsByPackage = d.studentsByPackageCount;
-            let packagesByStudentsChart = this.refs.packagesByStudentsChart.getChart();
-            Object.keys(studentsByPackage).forEach(function(key) {
-                packagesByStudentsChart.series[0].addPoint({name: key, y: studentsByPackage[key]});
-            });
-            
-            let studentsByInstructor = d.studentsByInstructorCount;
-            let instructorsByStudentsChart = this.refs.instructorsByStudentsChart.getChart();
-            Object.keys(studentsByInstructor).forEach(function(key) {
-                instructorsByStudentsChart.series[0].addPoint({name: key, y: studentsByInstructor[key]});
-            });
-            
-        }.bind(this));
-    }
-    render() {
-        var config = {
-            chart: {
-                height: 144
-            },
-            title: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'Students',
-                type: 'pie',
-                innerSize: '75%',
-                dataLabels: {
-                    distance: 1
-                },
-                colors: [
-                    '#C83737',
-                    '#2F4986',
-                    '#C87937',
-                    '#9467bd',
-                    '#8c564b',
-                    '#e377c2',
-                    '#7f7f7f',
-                    '#217878',
-                    '#bcbd22',
-                    '#17becf'
-                ],
-                data: []
-            }]
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            studentsByGenderCount: {},
+            studentsByPackageCount: {},
+            studentsByInstructorCount: {}
         };
+        this._onDashboardDataChanged = this._onDashboardDataChanged.bind(this);
+    }
+
+    componentWillMount() {
+        DashboardStore.addChangeListener(this._onDashboardDataChanged);
+    }
+
+    componentDidMount() {
+        DashboardActions.loadDashboardData();
+    }
+    
+    componentWillUnmount() {
+        DashboardStore.removeChangeListener(this._onDashboardDataChanged);
+    }
+
+    _onDashboardDataChanged() {
+        this.setState({
+            loading: DashboardStore.isLoading,
+            studentsByGenderCount: DashboardStore.studentsByGenderCount,
+            studentsByPackageCount: DashboardStore.studentsByPackageCount,
+            studentsByInstructorCount: DashboardStore.studentsByInstructorCount
+        });
+    }
+
+    render() {
+        let studentsByGender = this.state.studentsByGenderCount;
+        let chart1 = _.cloneDeep(baseChartConfig);
+        let nameAlias = {'M': 'Men', 'F': 'Women'};
+        _.keys(studentsByGender).forEach(function(key) {
+            chart1.series[0].data.push({name: nameAlias[key], y: studentsByGender[key]});
+        });
+
+        let studentsByPackage = this.state.studentsByPackageCount;
+        let chart2 = _.cloneDeep(baseChartConfig);
+        _.keys(studentsByPackage).forEach(function(key) {
+            chart2.series[0].data.push({name: key, y: studentsByPackage[key]});
+        });
+
+        let studentsByInstructor = this.state.studentsByInstructorCount;
+        let chart3 = _.cloneDeep(baseChartConfig);
+        _.keys(studentsByInstructor).forEach(function(key) {
+            chart3.series[0].data.push({name: key, y: studentsByInstructor[key]});
+        });
+
         return (
             <blocks cols="3">
                 <div>
                     <div>
-                        <Highcharts config={config} ref="studentsByGenderChart"/>
+                        <Highcharts config={chart1} ref="studentsByGenderChart"/>
                     </div>
                     <Link to="students" className="dashboard-launcher students">
                         <h1 className="title">
@@ -78,7 +110,7 @@ export default class Dashboard extends React.Component {
 
                 <div>
                     <div>
-                        <Highcharts config={config} ref="packagesByStudentsChart"/>
+                        <Highcharts config={chart2} ref="packagesByStudentsChart"/>
                     </div>
                     <Link to="packages" className="dashboard-launcher packages">
                         <h1 className="title">
@@ -92,7 +124,7 @@ export default class Dashboard extends React.Component {
 
                 <div>
                     <div>
-                        <Highcharts config={config} ref="instructorsByStudentsChart"/>
+                        <Highcharts config={chart3} ref="instructorsByStudentsChart"/>
                     </div>
                     <Link to="instructors" className="dashboard-launcher instructors">
                         <h1 className="title">

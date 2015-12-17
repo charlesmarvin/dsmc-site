@@ -75,20 +75,5 @@ export default {
     
     updatePackage(id, pkg) {
         return r('patch', SECURE_API_CONTEXT + 'packages/' + id, pkg);
-    },
-    
-    getDashboardContent() {
-        return r('get', SECURE_API_CONTEXT + 'dashboard');
-    },
-    
-    login(username, password) {
-        return r('post', API_CONTEXT + 'login', {username, password}).then(function(res) {
-            LoginActions.loginUser(res.jwt);
-            return true;
-        });
-    },
-    
-    logout() {
-        LoginActions.logoutUser();
     }
 };

@@ -1,4 +1,5 @@
-const headers = {
+import LoginStore from '../stores/LoginStore';
+const JSON_HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 };
@@ -10,6 +11,10 @@ function handleErrors(response) {
     return response;
 }
 function doFetch(method, url, data = null) {
+    var headers = Object.assign({}, JSON_HEADERS);
+    if (LoginStore.jwt) {
+        Object.assign(headers, {Authorization: 'Bearer ' + LoginStore.jwt});
+    }
     var options = {
         method,
         headers

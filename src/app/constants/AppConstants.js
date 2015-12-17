@@ -8,5 +8,15 @@ export default {
     JSON_HEADERS: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-    }
+    },
+    //Login constants
+    LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+    LOGIN_FAILURE: 'LOGIN_FAILURE',
+    LOGOUT_USER: 'LOGOUT_USER',
+    LOGIN_REQUESTED: 'LOGIN_REQUESTED',
+
+    //dashboard constants
+    DASHBOARD_REQUESTED: 'DASHBOARD_REQUESTED',
+    DASHBOARD_REQUEST_SUCCESS: 'DASHBOARD_REQUEST_SUCCESS',
+    DASHBOARD_REQUEST_FAILURE: 'DASHBOARD_REQUEST_FAILURE'
 };
