@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Highcharts from 'react-highcharts/dist/bundle/highcharts';
 import DashboardActions from '../actions/DashboardActions';
 import DashboardStore from '../stores/DashboardStore';
+import Students from './Students';
 
 const baseChartConfig = {
     chart: {
@@ -94,21 +95,6 @@ export default class Dashboard extends React.Component {
             chart3.series[0].data.push({name: key, y: studentsByInstructor[key]});
         });
 
-        let infoCards = this.state.students.map((s) => {
-            let addressLine2 = _.isEmpty(s.addressLine2) ? '' : <span>{s.addressLine2} <br/></span>;
-            return (
-                    <div className="info-card flex-auto p2 m2 border" key={s.id}>
-                        <p className="regular">
-                            <strong className="big">{s.firstName} {s.lastName}</strong><br/>
-                            {s.primaryPhone}<br/>
-                            {s.email}<br/><br/>
-                            {s.addressLine1}<br/>
-                            {addressLine2}
-                            {s.city}, {s.state} {s.zipcode}<br/>
-                        </p>
-                    </div>
-            );
-        });
         return (
             <div>
                 <div className="md-flex flex-justify">
@@ -154,9 +140,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <div className="flex flex-wrap">
-                    {infoCards}
-                </div>
+                <Students/>
             </div>
         );
     }
