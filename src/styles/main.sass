@@ -1,3 +1,7 @@
+@import '~basscss/css/basscss';
+body {
+  font-size: 90%;
+}
 $breakpoint-small: 768px;
 @mixin ease-in($property, $duration) {
   -webkit-transition: $property $duration ease-in;
@@ -27,39 +31,11 @@ $breakpoint-small: 768px;
   display: table;
   clear: both;
 }
-
-.container {
-    border-top: 3px solid #1EBDA5;
-    padding: 0 18px;
-}
 .chart {
-    margin: 0 auto;
     display: block;
 }
-
-nav {
-    &.left {
-        li {
-            margin-right: 4px;
-        }
-    }
-    &.right {
-        li {
-            margin-left: 4px;
-        }
-    }
-    ul {
-        margin: 0;
-        list-style: none;
-        li {
-            display: inline-block;
-        }
-    }
-}
-
 .nav-header {
-    background: #FFF;
-    margin: 0 -18px 24px -18px;
+    // background: #FFF;
     clear: both;
     position: relative;
     a {
@@ -105,44 +81,25 @@ nav {
     }
     
 }
-
-.data-grid-toolbar {
-  padding-left: 1em;
-  padding-right: 1em;
-  span {
-    display: inline-block !important;
-    padding-left: .6em;
-  }
-}
-.table-hovered tbody tr:hover td .grid-item-edit-icon {
-  visibility: visible;
-  @include ease-out(visibility, 400ms);
-}
-.grid-item-edit-link {
-  .grid-item-edit-icon {
-    visibility: hidden;
-    padding-right: .6em;
-  } 
-}
 .dashboard-launcher {
-  padding-top: 2em;
   text-decoration: none;
   text-align: center;
   display: block;
   font-weight: 300;
   color: #212121;
-  border-bottom: 2px transparent solid;
   @include ease-out(boarder-color, 200ms);
 
   &:hover {
-    border-bottom: 2px rgb(33,211,184) solid;
     color: #212121;
+    text-decoration: none;
   }
 }
 .info-card {
-  padding: 1.5em;
-  font-size: 90%;
-  background-color: #f5f5f5;
+  font-size: 85%;
+  // background-color: #F0F0F0;
+}
+.info-card-container {
+  // background-color: #FFF;
 }
 @media print {
   .no-print, .no-print *

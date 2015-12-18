@@ -63,7 +63,7 @@ export default class Packages extends React.Component {
             </Link>
         );
         return (
-            <div className="unit-row">
+            <div>
                 <DataGridToolbar newEntryLink={newEntryLink} filterHandler={this._handleSearch} />
                 <DataGrid data={this.state.packages} columnConfigs={this.columnConfigs} 
                     filter={this.state.filter} />

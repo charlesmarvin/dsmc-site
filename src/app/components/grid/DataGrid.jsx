@@ -132,10 +132,12 @@ export default class DataGrid extends React.Component {
         var gridData = (this.props.filter.length) ? this.props.data.filter(filterFn) : this.props.data;
         
         return (
-            <table className="table-hovered">
-                <DataGridHeader columnConfigs={this.props.columnConfigs}/>
-                <DataGridBody data={gridData} columnConfigs={this.props.columnConfigs} />
-            </table>
+            <div>
+                <table className="table-light">
+                    <DataGridHeader columnConfigs={this.props.columnConfigs}/>
+                    <DataGridBody data={gridData} columnConfigs={this.props.columnConfigs} />
+                </table>
+            </div>
         );
     }
 }

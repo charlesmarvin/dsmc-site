@@ -81,23 +81,25 @@ export default class Login extends React.Component {
     }
     
     render() {
-        var requiredError = <span className="error">Required</span>;
+        var requiredError = <span className="red h5">Required</span>;
         var usernameError = (this.state.hasUsernameError) ? requiredError : '';
         var passwordError = (this.state.hasPasswordError) ? requiredError : '';
-        var loginError = (this.state.hasLoginError) ? <span className="error">Login failed</span> : '';
+        var loginError = (this.state.hasLoginError) ? <span className="red">Login failed</span> : '';
         var loading = (this.state.loading) ? <i className="fa fa-spinner"></i> : '';
         return (
-            <form className="forms login-form width-6" onSubmit={this.handleSubmit}>
+            <form className="md-col-4 p2 mx-auto" onSubmit={this.handleSubmit}>
                 <section>
                     <label>Username {usernameError}</label>
-                    <input type="text" onChange={this.handleUsernameChange}/>
+                    <input className="block col-12 mb1 field" 
+                        type="text" onChange={this.handleUsernameChange}/>
                 </section>
                 <section>
                     <label>Password {passwordError}</label>
-                    <input type="password" onChange={this.handlePasswordChange}/>
+                    <input className="block col-12 mb1 field" 
+                        type="password" onChange={this.handlePasswordChange}/>
                 </section>
                 <section>
-                    <button type="primary">Log in {loading}</button>
+                    <button type="submit" className="btn btn-primary">Log in {loading}</button>
                     <p>{loginError}</p>
                 </section>
             </form>

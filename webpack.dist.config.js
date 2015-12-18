@@ -61,14 +61,8 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel-loader'
     }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(sass|scss)$/,
+      test: /\.(sass|scss|css)$/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
-    }, {
-      test: /\.less$/,
-      loader: 'style-loader!css-loader!less-loader?outputStyle=expanded'
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'

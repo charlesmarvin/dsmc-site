@@ -1,5 +1,4 @@
 require('styles/main.sass');
-require('vendor/kube/kube.less');
 require('font-awesome-webpack');
 
 import React from 'react';
@@ -46,4 +45,4 @@ RouterContainer.set(router);
 
 LoginActions.authenticateFromToken();
 
-ReactDOM.render(router, document.getElementById('content'));
+ReactDOM.render(router, document.getElementById('app'));

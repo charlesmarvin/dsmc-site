@@ -97,24 +97,22 @@ export default class Dashboard extends React.Component {
         let infoCards = this.state.students.map((s) => {
             let addressLine2 = _.isEmpty(s.addressLine2) ? '' : <span>{s.addressLine2} <br/></span>;
             return (
-                <column cols="3" key={s.id}>
-                    <div className="info-card">
-                        <address>
+                    <div className="info-card flex-auto p2 m2 border" key={s.id}>
+                        <p className="regular">
                             <strong className="big">{s.firstName} {s.lastName}</strong><br/>
                             {s.primaryPhone}<br/>
                             {s.email}<br/><br/>
                             {s.addressLine1}<br/>
                             {addressLine2}
                             {s.city}, {s.state} {s.zipcode}<br/>
-                        </address>
+                        </p>
                     </div>
-                </column>
             );
         });
         return (
             <div>
-                <blocks cols="3">
-                    <div>
+                <div className="md-flex flex-justify">
+                    <div className="flex-auto m2">
                         <div>
                             <Highcharts config={chart1} ref="studentsByGenderChart"/>
                         </div>
@@ -128,7 +126,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="flex-auto m2">
                         <div>
                             <Highcharts config={chart2} ref="packagesByStudentsChart"/>
                         </div>
@@ -142,7 +140,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
 
-                    <div>
+                    <div className="flex-auto m2"> 
                         <div>
                             <Highcharts config={chart3} ref="instructorsByStudentsChart"/>
                         </div>
@@ -155,11 +153,10 @@ export default class Dashboard extends React.Component {
                             </p>
                         </Link>
                     </div>
-                </blocks>
-
-                <row>
+                </div>
+                <div className="flex flex-wrap">
                     {infoCards}
-                </row>
+                </div>
             </div>
         );
     }

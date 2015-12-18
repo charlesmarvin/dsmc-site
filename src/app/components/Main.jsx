@@ -38,19 +38,19 @@ export default class Main extends React.Component {
     
     render() {
         var links = this.state.isLoggedIn ?
-            (<ul>
-                <li><Link to="/students">Students</Link></li>
-                <li><Link to="/packages">Packages</Link></li>
-                <li><Link to="/instructors">Instructors</Link></li>
-                <li><Link to="/admin">Admin</Link></li>
-                <li><a onClick={this._logout}>Logout</a></li>
+            (<ul className="list-reset">
+                <li className="inline-block mr1"><Link to="/students">Students</Link></li>
+                <li className="inline-block mr1"><Link to="/packages">Packages</Link></li>
+                <li className="inline-block mr1"><Link to="/instructors">Instructors</Link></li>
+                <li className="inline-block mr1"><Link to="/admin">Admin</Link></li>
+                <li className="inline-block mr1"><a onClick={this._logout}>Logout</a></li>
             </ul>)
             : 
             (<ul>
-                <li><Link to="/login">Login</Link></li>
+                <li className="inline-block mr1"><Link to="/login">Login</Link></li>
             </ul>);
         return (
-            <div className="container">
+            <div className="clearfix">
                 <header className="nav-header group">
                     <Link to="/" className="brand">Driver A</Link>
                     <a className="nav-toggle" onClick={this._toggleNav}>

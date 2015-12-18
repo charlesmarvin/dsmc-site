@@ -20,7 +20,6 @@ export default class Students extends React.Component {
                 render(val, context, id) {
                     return (
                         <Link to={`/student/${id}`} className="grid-item-edit-link">
-                            <span className="grid-item-edit-icon"><i className="fa fa-pencil"></i></span>
                             {val} 
                         </Link>
                     );
@@ -47,6 +46,7 @@ export default class Students extends React.Component {
             }
         ];
         this._onDataLoaded = this._onDataLoaded.bind(this);
+        this._handleSearch = this._handleSearch.bind(this);
     }
     
     componentWillMount() {

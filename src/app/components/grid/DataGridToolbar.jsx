@@ -1,13 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class GridToolBar extends React.Component {
     constructor(props) {
         super(props);
+        this._handleSearch = this._handleSearch.bind(this);
     }
     
     _handleSearch(event) {
         event.preventDefault();
-        var searchText = React.findDOMNode(this.refs.searchInput).value.trim();
+        var searchText = ReactDOM.findDOMNode(this.refs.searchInput).value.trim();
         this.props.filterHandler(searchText);
     }
     
@@ -20,7 +22,7 @@ export default class GridToolBar extends React.Component {
         var print = '';
         if (this.props.enablePrint) {
             print = (
-                <li key="print">
+                <li key="print" className="inline-block mr1">
                     <a title="Print" data-theme="blue" data-tools="tooltip" onClick={this._handlePrint}>
                         <i className="fa fa-print"></i> 
                       </a>
@@ -30,7 +32,7 @@ export default class GridToolBar extends React.Component {
         var download = '';
         if (this.props.enableDownload) {
             download = (
-                <li key="download">
+                <li key="download" className="inline-block mr1">
                     <a title="Download" data-theme="blue" data-tools="tooltip">
                         <i className="fa fa-download"></i>  
                     </a>
@@ -40,24 +42,24 @@ export default class GridToolBar extends React.Component {
         var searchWidget = '';
         if (this.props.enableFilter) {
             searchWidget = (
-                <form className="right end" onSubmit={this._handleSearch}>
+                <form className="right" onSubmit={this._handleSearch}>
                     <input type="search" name="go" placeholder="Search" 
-                        ref="searchInput" className="input-small" onBlur={this._handleSearch} />
+                        ref="searchInput" className="field" onBlur={this._handleSearch} />
                 </form>
             );
         }
         var addNewItemLink = '';
         if (this.props.enableAdd) {
             addNewItemLink = (
-                <li key="addNewItemLink">
+                <li key="addNewItemLink" className="inline-block mr1">
                     {this.props.newEntryLink}
                 </li>
             );
         }
         return (
-            <header className="grid-toolbar-header">
+            <header className="px2">
                 <nav className="left">
-                    <ul>
+                    <ul className="list-reset">
                     {addNewItemLink}
                     {print}
                     {download}
