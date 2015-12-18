@@ -1,7 +1,9 @@
 import {
     DASHBOARD_REQUESTED, 
     DASHBOARD_REQUEST_SUCCESS, 
-    DASHBOARD_REQUEST_FAILURE
+    DASHBOARD_REQUEST_FAILURE,
+    STUDENTS_REQUEST_SUCCESS,
+    STUDENTS_REQUEST_FAILURE
 } from '../constants/AppConstants';
 import BaseStore from './BaseStore';
 
@@ -12,9 +14,10 @@ class DashboardStore extends BaseStore {
         this.subscribe(() => this._onAction.bind(this));
         this._isLoading = false;
         this._hasError = false; 
-        this._studentsByGenderCount = undefined;
-        this._studentsByPackageCount = undefined;
-        this._studentsByInstructorCount = undefined;
+        this._studentsByGenderCount = {};
+        this._studentsByPackageCount = {};
+        this._studentsByInstructorCount = {};
+        this._students = [];
     }
 
     _onAction(action) {
@@ -25,13 +28,21 @@ class DashboardStore extends BaseStore {
             break;
         case DASHBOARD_REQUEST_SUCCESS:
             this._isLoading = false;
-            this._studentsByGenderCount = action.studentsByGenderCount;
-            this._studentsByPackageCount = action.studentsByPackageCount;
-            this._studentsByInstructorCount = action.studentsByInstructorCount;
+            this._studentsByGenderCount = action.studentsByGenderCount || {};
+            this._studentsByPackageCount = action.studentsByPackageCount || {};
+            this._studentsByInstructorCount = action.studentsByInstructorCount || {};
+            this._students = action.students || [];
             this.emitChange();
             break;
         case DASHBOARD_REQUEST_FAILURE:
             this._isLoading = false;
+            this.emitChange();
+            break;
+        case STUDENTS_REQUEST_SUCCESS:
+            this._students = action.students;
+            this.emitChange();
+            break;
+        case STUDENTS_REQUEST_FAILURE:
             this.emitChange();
             break;
         default:
@@ -49,6 +60,10 @@ class DashboardStore extends BaseStore {
 
     get studentsByInstructorCount() {
         return this._studentsByInstructorCount;
+    }
+
+    get students() {
+        return this._students;
     }
 }
 

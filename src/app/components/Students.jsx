@@ -3,7 +3,8 @@ import DataGrid from 'components/grid/DataGrid';
 import DataGridToolbar from 'components/grid/DataGridToolbar';
 import Formatters from 'utils/Formatters';
 import {Link} from 'react-router';
-import Services from './Services';
+import DashboardActions from '../actions/DashboardActions';
+import DashboardStore from '../stores/DashboardStore';
 
 export default class Students extends React.Component {
     constructor(props) {
@@ -45,12 +46,23 @@ export default class Students extends React.Component {
                 }
             }
         ];
+        this._onDataLoaded = this._onDataLoaded.bind(this);
     }
     
     componentWillMount() {
-        Services.getStudents().then(function(data) {
-            this.setState({students: data});
-        }.bind(this));
+        DashboardStore.addChangeListener(this._onDataLoaded);
+    }
+
+    componentDidMount() {
+        DashboardActions.loadStudents();
+    }
+    
+    componentWillUnmount() {
+        DashboardStore.removeChangeListener(this._onDataLoaded);
+    }
+
+    _onDataLoaded() {
+        this.setState({students: DashboardStore.students});
     }
     
     _enrichStudentData(data) {

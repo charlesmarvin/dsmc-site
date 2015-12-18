@@ -3,7 +3,10 @@ import {
     SECURE_API_CONTEXT, 
     DASHBOARD_REQUESTED, 
     DASHBOARD_REQUEST_SUCCESS, 
-    DASHBOARD_REQUEST_FAILURE
+    DASHBOARD_REQUEST_FAILURE,
+    STUDENTS_REQUESTED,
+    STUDENTS_REQUEST_SUCCESS,
+    STUDENTS_REQUEST_FAILURE
 } from '../constants/AppConstants.js';
 import {get} from 'utils/JsonFetch';
 
@@ -23,6 +26,24 @@ export default {
         .catch((e) => {
             console.warn('Failed to load dashboard data. Error: ' + JSON.stringify(e));
             AppDispatcher.dispatch({actionType: DASHBOARD_REQUEST_FAILURE});
+        });
+    },
+
+    loadStudents: () => {
+        AppDispatcher.dispatch({
+            actionType: STUDENTS_REQUESTED
+        });
+        return get(SECURE_API_CONTEXT + 'students')
+        .then((data) => {
+            console.debug('Students loaded successfully.');
+            AppDispatcher.dispatch({
+                actionType: STUDENTS_REQUEST_SUCCESS,
+                students: data
+            });
+        })
+        .catch((e) => {
+            console.warn('Failed to load students. Error: ' + JSON.stringify(e));
+            AppDispatcher.dispatch({actionType: STUDENTS_REQUEST_FAILURE});
         });
     }
 };

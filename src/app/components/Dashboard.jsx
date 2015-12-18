@@ -46,7 +46,8 @@ export default class Dashboard extends React.Component {
             loading: false,
             studentsByGenderCount: {},
             studentsByPackageCount: {},
-            studentsByInstructorCount: {}
+            studentsByInstructorCount: {},
+            students: []
         };
         this._onDashboardDataChanged = this._onDashboardDataChanged.bind(this);
     }
@@ -68,7 +69,8 @@ export default class Dashboard extends React.Component {
             loading: DashboardStore.isLoading,
             studentsByGenderCount: DashboardStore.studentsByGenderCount,
             studentsByPackageCount: DashboardStore.studentsByPackageCount,
-            studentsByInstructorCount: DashboardStore.studentsByInstructorCount
+            studentsByInstructorCount: DashboardStore.studentsByInstructorCount,
+            students: DashboardStore.students
         });
     }
 
@@ -92,51 +94,73 @@ export default class Dashboard extends React.Component {
             chart3.series[0].data.push({name: key, y: studentsByInstructor[key]});
         });
 
+        let infoCards = this.state.students.map((s) => {
+            let addressLine2 = _.isEmpty(s.addressLine2) ? '' : <span>{s.addressLine2} <br/></span>;
+            return (
+                <column cols="3" key={s.id}>
+                    <div className="info-card">
+                        <address>
+                            <strong className="big">{s.firstName} {s.lastName}</strong><br/>
+                            {s.primaryPhone}<br/>
+                            {s.email}<br/><br/>
+                            {s.addressLine1}<br/>
+                            {addressLine2}
+                            {s.city}, {s.state} {s.zipcode}<br/>
+                        </address>
+                    </div>
+                </column>
+            );
+        });
         return (
-            <blocks cols="3">
-                <div>
+            <div>
+                <blocks cols="3">
                     <div>
-                        <Highcharts config={chart1} ref="studentsByGenderChart"/>
+                        <div>
+                            <Highcharts config={chart1} ref="studentsByGenderChart"/>
+                        </div>
+                        <Link to="students" className="dashboard-launcher students">
+                            <h1 className="title">
+                                Students
+                            </h1>
+                            <p className="caption">
+                                Add new students and manage info on existing ones 
+                            </p>
+                        </Link>
                     </div>
-                    <Link to="students" className="dashboard-launcher students">
-                        <h1 className="title">
-                            Students
-                        </h1>
-                        <p className="caption">
-                            Add new students and manage info on existing ones 
-                        </p>
-                    </Link>
-                </div>
 
-                <div>
                     <div>
-                        <Highcharts config={chart2} ref="packagesByStudentsChart"/>
+                        <div>
+                            <Highcharts config={chart2} ref="packagesByStudentsChart"/>
+                        </div>
+                        <Link to="packages" className="dashboard-launcher packages">
+                            <h1 className="title">
+                                Packages
+                            </h1>
+                            <p className="caption">
+                                Manage details about offered licensing packages 
+                            </p>
+                        </Link>
                     </div>
-                    <Link to="packages" className="dashboard-launcher packages">
-                        <h1 className="title">
-                            Packages
-                        </h1>
-                        <p className="caption">
-                            Manage details about offered licensing packages 
-                        </p>
-                    </Link>
-                </div>
 
-                <div>
                     <div>
-                        <Highcharts config={chart3} ref="instructorsByStudentsChart"/>
+                        <div>
+                            <Highcharts config={chart3} ref="instructorsByStudentsChart"/>
+                        </div>
+                        <Link to="instructors" className="dashboard-launcher instructors">
+                            <h1 className="title">
+                                Instructors
+                            </h1>
+                            <p className="caption">
+                                Add and update information for affiliated instructors
+                            </p>
+                        </Link>
                     </div>
-                    <Link to="instructors" className="dashboard-launcher instructors">
-                        <h1 className="title">
-                            Instructors
-                        </h1>
-                        <p className="caption">
-                            Add and update information for affiliated instructors
-                        </p>
-                    </Link>
-                </div>
+                </blocks>
 
-            </blocks>
+                <row>
+                    {infoCards}
+                </row>
+            </div>
         );
     }
 }
