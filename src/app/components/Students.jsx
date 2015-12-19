@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router';
+import _ from 'lodash';
+import Formatters from 'utils/Formatters';
 import DataGrid from 'components/grid/DataGrid';
 import DataGridToolbar from 'components/grid/DataGridToolbar';
-import Formatters from 'utils/Formatters';
-import {Link} from 'react-router';
 import DashboardActions from '../actions/DashboardActions';
 import DashboardStore from '../stores/DashboardStore';
 
@@ -73,7 +74,7 @@ export default class Students extends React.Component {
                                            datum.addressLine2, 
                                            datum.city,
                                            datum.state,
-                                           datum.zipcode ].join(', ');
+                                           datum.zipcode ].filter((e) => !_.isEmpty(e)).join(', ');
             return enrichedRecord;
         });
     }

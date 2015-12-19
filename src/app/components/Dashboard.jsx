@@ -9,7 +9,9 @@ import Students from './Students';
 
 const baseChartConfig = {
     chart: {
-        height: 144
+        type: 'pie',
+        height: 256,
+        margin: 0
     },
     title: {
         text: null
@@ -17,24 +19,25 @@ const baseChartConfig = {
     credits: {
         enabled: false
     },
+    plotOptions: {
+        pie: {
+            slicedOffset: 0,
+            size: '95%',
+            innerSize: '40%',
+            dataLabels: {
+                enabled: true,
+                distance: -40
+            }    
+        }
+    },
     series: [{
         name: 'Students',
-        type: 'pie',
-        innerSize: '75%',
-        dataLabels: {
-            distance: 1
-        },
         colors: [
             '#C83737',
             '#2F4986',
+            '#17becf',
             '#C87937',
-            '#9467bd',
-            '#8c564b',
-            '#e377c2',
-            '#7f7f7f',
-            '#217878',
-            '#bcbd22',
-            '#17becf'
+            '#bcbd22'
         ],
         data: []
     }]

@@ -44,7 +44,8 @@ export default class GridToolBar extends React.Component {
             searchWidget = (
                 <form className="right" onSubmit={this._handleSearch}>
                     <input type="search" name="go" placeholder="Search" 
-                        ref="searchInput" className="field" onBlur={this._handleSearch} />
+                        ref="searchInput" className="field p0 m0 grid-search-input" 
+                        onBlur={this._handleSearch} />
                 </form>
             );
         }
