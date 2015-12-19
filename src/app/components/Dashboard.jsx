@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Highcharts from 'react-highcharts/dist/bundle/highcharts';
 import DashboardActions from '../actions/DashboardActions';
 import DashboardStore from '../stores/DashboardStore';
-import Students from './Students';
+import StudentTable from './StudentTable';
 
 const baseChartConfig = {
     chart: {
@@ -143,7 +143,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <Students/>
+                <StudentTable students={this.state.students}/>
             </div>
         );
     }
