@@ -2,84 +2,8 @@
 body {
   font-size: 90%;
 }
-$breakpoint-small: 768px;
-@mixin ease-in($property, $duration) {
-  -webkit-transition: $property $duration ease-in;
-  -moz-transition: $property $duration ease-in;
-  -ms-transition: $property $duration ease-in;
-  -o-transition: $property $duration ease-in;
-  transition: $property $duration ease-in;
-}
-
-@mixin ease-out($property, $duration) {
- -webkit-transition: $property $duration ease-out;
-  -moz-transition: $property $duration ease-out;
-  -ms-transition: $property $duration ease-out;
-  -o-transition: $property $duration ease-out;
-  transition: $property $duration ease-out;
-}
-
-@mixin ease-in-out($property, $duration) {
-  -webkit-transition: $property $duration ease-in-out;
-  -moz-transition: $property $duration ease-in-out;
-  -ms-transition: $property $duration ease-in-out;
-  -o-transition: $property $duration ease-in-out;
-  transition: $property $duration ease-in-out;
-}
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.chart {
-    display: block;
-}
-.nav-header {
-    // background: #FFF;
-    clear: both;
-    position: relative;
-    a {
-      display: inline-block;
-      text-decoration: none;
-      padding: 8px 10px;
-      &.brand {
-        background-color: rgb(33,211,184);
-        padding-left: 18px;
-        padding-right: 18px;
-        color: #FFF;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-    }
-    .active {
-        border-bottom: 2px solid;
-    }
-    @media (max-width: $breakpoint-small) {
-      nav {
-        text-align: center;
-        display: none;
-        li {
-          display: block;
-        }
-        &.open {
-          display: block;
-        }
-        border-bottom: 1px solid rgba(33,211,184, .75);
-      }
-      .nav-toggle {
-        display: block;
-        float: right;
-      }
-    }
-    @media (min-width: $breakpoint-small) {
-      nav {
-        display: inline-block;
-      }
-      .nav-toggle {
-        display: none;
-      }
-    }
-    
+.small {
+  font-size: 75%;
 }
 .dashboard-launcher {
   text-decoration: none;
@@ -87,26 +11,11 @@ $breakpoint-small: 768px;
   display: block;
   font-weight: 300;
   color: #212121;
-  @include ease-out(boarder-color, 200ms);
-
   &:hover {
     color: #212121;
     text-decoration: none;
   }
 }
-.info-card {
-  font-size: 85%;
-  // background-color: #F0F0F0;
-}
-.info-card-container {
-  // background-color: #FFF;
-}
 .field.grid-search-input {
   height: 1.5rem;
-}
-@media print {
-  .no-print, .no-print *
-  {
-    display: none !important;
-  }
 }

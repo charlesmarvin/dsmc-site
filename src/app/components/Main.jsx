@@ -37,29 +37,34 @@ export default class Main extends React.Component {
     }
     
     render() {
-        var links = this.state.isLoggedIn ?
-            (<ul className="list-reset">
-                <li className="inline-block mr1"><Link to="/students">Students</Link></li>
-                <li className="inline-block mr1"><Link to="/packages">Packages</Link></li>
-                <li className="inline-block mr1"><Link to="/instructors">Instructors</Link></li>
-                <li className="inline-block mr1"><Link to="/admin">Admin</Link></li>
-                <li className="inline-block mr1"><a onClick={this._logout}>Logout</a></li>
-            </ul>)
-            : 
-            (<ul>
-                <li className="inline-block mr1"><Link to="/login">Login</Link></li>
-            </ul>);
+        var navLinks = '', 
+            loginLinks = '', 
+            homeLink = (<Link to="/" className="btn py2 caps bg-black white">Driver A</Link>),
+            navStateClass = this.state.isOpen ? 'show' : 'hide';
+        if (this.state.isLoggedIn) {
+            navLinks = (
+                <span>
+                    <Link to="/students" className="btn py2">Students</Link>
+                    <Link to="/packages" className="btn py2">Packages</Link>
+                    <Link to="/instructors" className="btn py2">Instructors</Link>
+                    <Link to="/admin" className="btn py2">Admin</Link>
+                </span>
+            );
+            loginLinks = (<a onClick={this._logout} className="btn py2 {navStateClass}">Logout</a>);
+        } else {
+            loginLinks = (<Link to="/login" className="btn py2 {navStateClass}">Login</Link>);
+        }
         return (
-            <div className="clearfix">
-                <header className="nav-header group">
-                    <Link to="/" className="brand">Driver A</Link>
-                    <a className="nav-toggle" onClick={this._toggleNav}>
-                        <i className="fa fa-bars fa-lg"></i>
-                    </a>
-                    <nav className={this.state.isOpen ? 'open' : ''}>
-                        {links}
-                    </nav>
-                </header>
+            <div>
+                <nav className="clearfix mb2">
+                  <div className="md-col">
+                    {homeLink}
+                    {navLinks}
+                  </div>
+                  <div className="right">
+                    {loginLinks}
+                  </div>
+                </nav>
                 {this.props.children}
             </div>
         );
