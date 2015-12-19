@@ -27,6 +27,13 @@ export default class Students extends React.Component {
                 }
             },
             {
+                field: 'dob',
+                name: 'DOB',
+                format(val) {
+                    return Formatters.date(val, 'MM/DD/YY');
+                }
+            },
+            {
                 field: 'fullAddress',
                 name: 'Address'
             },
@@ -37,13 +44,6 @@ export default class Students extends React.Component {
             {
                 field: 'secondaryPhone',
                 format: Formatters.phoneNumber
-            },
-            {
-                field: 'dob',
-                name: 'DOB',
-                format(val) {
-                    return Formatters.date(val, 'MM/DD/YY');
-                }
             }
         ];
         this._onDataLoaded = this._onDataLoaded.bind(this);

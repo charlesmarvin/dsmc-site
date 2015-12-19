@@ -65,7 +65,7 @@ class DataGridRow extends React.Component {
                     value = config.render(value, this.props.rowData, this.props.rowId);
                 }
                 return (
-                    <td key={idx} className="p1">
+                    <td key={idx} className="py1">
                         {value}
                     </td>
                 );
