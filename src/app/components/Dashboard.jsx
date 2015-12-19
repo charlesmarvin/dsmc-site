@@ -22,7 +22,7 @@ const baseChartConfig = {
     plotOptions: {
         pie: {
             slicedOffset: 0,
-            size: '95%',
+            size: '90%',
             innerSize: '40%',
             dataLabels: {
                 enabled: true,
