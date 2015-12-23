@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import Services from './Services';
 import Formatters from 'utils/Formatters';
 
@@ -15,7 +16,7 @@ export default class Student extends React.Component {
     
     componentWillMount() {
         var {id} = this.props.params;
-        if (id !== 'new') {
+        if (!_.isEmpty(id) && id !== 'new') {
             this.setState({id});
             Services.getStudent(id).then(function(data) {
                 this.setState({student: data});
@@ -41,21 +42,22 @@ export default class Student extends React.Component {
     render() {
         return (
           <div className="p2">
-            <form className="forms md-col-6" onSubmit={this._handleSave}>
-              <label htmlFor="first-name">First Name</label>
-              <input id="firstName" type="text" required
+            <form className="forms md-col-6" onSubmit={this._handleSave} noValidate>
+              <label htmlFor="first-name">First Name <span className="red">*</span></label>
+              <input id="firstName" type="text" 
                     className="block col-12 mb1 field"
                     value={this.state.student.firstName} 
                     onChange={this._handleStudentFieldUpdate}/>
 
-              <label htmlFor="last-name">Last Name</label>
-              <input id="lastName" type="text" required
+              <label htmlFor="last-name">Last Name <span className="red">*</span></label>
+              <input id="lastName" type="text" 
                     className="block col-12 mb1 field"
                     value={this.state.student.lastName} 
                     onChange={this._handleStudentFieldUpdate}/>
 
-              <label htmlFor="dob">Date of Birth <span className="small muted">YYYY-MM-DD</span></label>
-              <input id="dob" type="text" required
+              <label htmlFor="dob">Date of Birth <span className="red">*</span>
+                <span className="small muted">YYYY-MM-DD</span></label>
+              <input id="dob" type="text"
                     className="block col-4 mb1 field" 
                     value={this.state.student.dob} 
                     onChange={this._handleStudentFieldUpdate}/>
@@ -73,12 +75,12 @@ export default class Student extends React.Component {
             
                 <label htmlFor="email">
                   E-Mail</label>
-                  <input id="email" type="email" required 
+                  <input id="email" type="email"  
                     className="block col-12 mb1 field"
                     value={this.state.student.email} 
                     onChange={this._handleStudentFieldUpdate}/>
 
-                <label htmlFor="primaryPhone">Primary Phone</label>
+                <label htmlFor="primaryPhone">Primary Phone <span className="red">*</span></label>
                   <input id="primaryPhone" type="tel"
                     className="block col-12 mb1 field" 
                     value={this.state.student.primaryPhone} 
@@ -185,5 +187,5 @@ export default class Student extends React.Component {
 }
 
 Student.propTypes = {
-    params: React.PropTypes.object.isRequired
+    params: React.PropTypes.func.isRequired
 };

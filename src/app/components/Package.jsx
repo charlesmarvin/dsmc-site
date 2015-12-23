@@ -1,5 +1,6 @@
 import React from 'react';
 import Services from './Services';
+import _ from 'lodash';
 
 export default class Package extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class Package extends React.Component {
     
     componentWillMount() {
         var {id} = this.props.params;
-        if (id !== 'new') {
+        if (!_.isEmpty(id) && id !== 'new') {
             this.setState({id});
             Services.getPackage(id).then(function(data) {
                 this.setState({package: data});
@@ -38,54 +39,41 @@ export default class Package extends React.Component {
     
     render() {
         return (
-             <form className="forms unit-padding" onSubmit={this._handleSave}>
-                <div>
+             <form className="forms unit-padding" onSubmit={this._handleSave} noValidate>
                   <label htmlFor="name">
-                    Package Name <span className="req">*</span>
-                    <input id="name" className="width-60" type="text" required 
+                    Package Name <span className="red">*</span>
+                </label>
+                    <input id="name" type="text" 
                         value={this.state.package.name} 
+                        className="block col-12 mb1 field"
                         onChange={this._handlePackageFieldUpdate}/>
-                  </label>
-                </div>
-
-                <div>
+                  
                   <label htmlFor="description">
-                    Description
-                    <textarea id="description" className="width-60" type="text" 
+                    Description</label>
+                    <textarea id="description" type="text" 
                         value={this.state.package.description} 
+                        className="block col-12 mb1 field"
                         onChange={this._handlePackageFieldUpdate}/>
-                  </label>
-                </div>
-
-                <div>
+                  
                     <label htmlFor="price">
-                        Price
-                        <input id="price" className="width-20" type="number" value={this.state.package.price} 
+                        Price <span className="red">*</span>
+                        </label>
+                        <input id="price" type="number" value={this.state.package.price} 
+                            className="block col-2 mb1 field"
                             onChange={this._handlePackageFieldUpdate}/>
-                    </label>
-                </div>
 
-                <div>
-                    <label htmlFor="active">
+                    <label htmlFor="active" className="block col-12 mb2">
                         <input id="active" type="checkbox" defaultChecked={this.state.package.active} 
                             onChange={this._handlePackageFieldUpdate}/>
                         Is Active
                     </label>
-                </div>
 
-              <button type="submit" className="btn btn-blue">Save</button>
+              <button type="submit" className="btn btn-primary">Save</button>
             </form>
         );
     }
 }
 
 Package.propTypes = {
-    params: React.PropTypes.object.isRequired,
-    columnConfigs: React.PropTypes.arrayOf(React.PropTypes.shape({
-        field: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string,
-        format: React.PropTypes.func,
-        renderHeader: React.PropTypes.func,
-        enabled: React.PropTypes.bool
-    })).isRequired
+    params: React.PropTypes.object.isRequired
 };
