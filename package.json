@@ -19,7 +19,7 @@
     "flux": "^2.1.1",
     "font-awesome": "^4.5.0",
     "font-awesome-webpack": "0.0.3",
-    "history": "1.13.1",
+    "history": "1.17.0",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.4",
     "libphonenumber-umd": "^1.0.1",
