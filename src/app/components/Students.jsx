@@ -86,13 +86,10 @@ export default class Students extends React.Component {
     }
     
     render() {
-        var newEntryLink = (<Link to={'/student/new'}>
-                <i className="fa fa-plus" title="New Student"></i>
-            </Link>);
         var gridData = this._enrichStudentData(this.state.students);
         return (
             <div>
-                <DataGridToolbar newEntryLink={newEntryLink} filterHandler={this._handleSearch} />
+                <DataGridToolbar filterHandler={this._handleSearch} />
                 <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
             </div>
         );

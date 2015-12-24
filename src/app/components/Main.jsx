@@ -42,22 +42,22 @@ export default class Main extends React.Component {
         if (this.state.isLoggedIn) {
             navLinks = (
                 <span>
-                    <Link to="/students" className="btn py2">Students</Link>
-                    <Link to="/packages" className="btn py2">Packages</Link>
-                    <Link to="/instructors" className="btn py2">Instructors</Link>
+                    <Link to="/students" className="btn py2" title="View All Students">Students</Link>
+                    <Link to="/packages" className="btn py2" title="View All Packages">Packages</Link>
+                    <Link to="/instructors" className="btn py2" title="View All Instructors">Instructors</Link>
                 </span>
             );
-            loginLinks = (<a onClick={this._logout} className="btn py2">Logout</a>);
+            loginLinks = (<a onClick={this._logout} className="btn py2" title="Logout">Logout</a>);
         } else {
-            loginLinks = (<Link to="/login" className="btn py2">Login</Link>);
+            loginLinks = (<Link to="/login" className="btn py2" title="Login">Login</Link>);
         }
         return (
             <div>
                 <nav className="clearfix mb1">
                   <div className="sm-col">
                     <Link to="/" className="btn py2 caps bg-black white">Driver A</Link>
-                    <Link to="/add" className="btn py2 gray bg-darken-1">
-                        <i className="fa fa-plus fa-lg"></i>
+                    <Link to="/add" className="btn py2 gray bg-darken-1" title="Add new Student/Package/Instructor">
+                        +
                     </Link>
                     {navLinks}
                   </div>

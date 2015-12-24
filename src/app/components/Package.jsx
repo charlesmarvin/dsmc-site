@@ -75,5 +75,5 @@ export default class Package extends React.Component {
 }
 
 Package.propTypes = {
-    params: React.PropTypes.object.isRequired
+    params: React.PropTypes.func.isRequired
 };

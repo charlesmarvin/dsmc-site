@@ -29,12 +29,12 @@ export default class AddItemView extends React.Component {
             break;
         case PACKAGE_TAB:
             packageTabClass = 'border-bottom';
-            content = <Package params={{}}/>;
+            content = <Package params={()=> null}/>;
             break;
         case STUDENT_TAB:
         default:
             studentTabClass = 'border-bottom';
-            content = <Student params={{}}/>;
+            content = <Student params={()=> null}/>;
             break;
         }
         return (

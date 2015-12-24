@@ -1,5 +1,4 @@
 require('styles/main.sass');
-require('font-awesome-webpack');
 
 import React from 'react';
 import ReactDOM from 'react-dom';

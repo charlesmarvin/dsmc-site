@@ -57,14 +57,9 @@ export default class Packages extends React.Component {
     }
     
     render() {
-        var newEntryLink = (
-            <Link to={'/package/new'}>
-                <i className="fa fa-plus" title="Add New Package"></i>
-            </Link>
-        );
         return (
             <div>
-                <DataGridToolbar newEntryLink={newEntryLink} filterHandler={this._handleSearch} />
+                <DataGridToolbar filterHandler={this._handleSearch} />
                 <DataGrid data={this.state.packages} columnConfigs={this.columnConfigs} 
                     filter={this.state.filter} />
             </div>

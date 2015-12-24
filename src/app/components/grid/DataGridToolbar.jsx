@@ -24,7 +24,7 @@ export default class GridToolBar extends React.Component {
             print = (
                 <li key="print" className="inline-block mr1">
                     <a title="Print" data-theme="blue" data-tools="tooltip" onClick={this._handlePrint}>
-                        <i className="fa fa-print"></i> 
+                        Print
                       </a>
                 </li>
             );
@@ -34,7 +34,7 @@ export default class GridToolBar extends React.Component {
             download = (
                 <li key="download" className="inline-block mr1">
                     <a title="Download" data-theme="blue" data-tools="tooltip">
-                        <i className="fa fa-download"></i>  
+                        Download 
                     </a>
                 </li>
             );
@@ -49,19 +49,10 @@ export default class GridToolBar extends React.Component {
                 </form>
             );
         }
-        var addNewItemLink = '';
-        if (this.props.enableAdd) {
-            addNewItemLink = (
-                <li key="addNewItemLink" className="inline-block mr1">
-                    {this.props.newEntryLink}
-                </li>
-            );
-        }
         return (
             <header className="px2">
                 <nav className="left">
                     <ul className="list-reset">
-                    {addNewItemLink}
                     {print}
                     {download}
                     </ul>
@@ -73,8 +64,7 @@ export default class GridToolBar extends React.Component {
 }
 
 GridToolBar.propTypes = {
-    filterHandler: React.PropTypes.func.isRequired,
-    newEntryLink: React.PropTypes.object.isRequired,
+    filterHandler: React.PropTypes.func,
     enablePrint: React.PropTypes.bool,
     enableDownload: React.PropTypes.bool,
     enableFilter: React.PropTypes.bool,
