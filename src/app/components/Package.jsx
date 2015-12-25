@@ -9,6 +9,8 @@ export default class Package extends React.Component {
             id: 'new',
             package: {}
         };
+        this._handlePackageFieldUpdate = this._handlePackageFieldUpdate.bind(this);
+        this._handleSave = this._handleSave.bind(this);
     }
     
     componentWillMount() {
@@ -39,7 +41,7 @@ export default class Package extends React.Component {
     
     render() {
         return (
-             <form className="forms unit-padding" onSubmit={this._handleSave} noValidate>
+             <form className="forms p2" onSubmit={this._handleSave} noValidate>
                   <label htmlFor="name">
                     Package Name <span className="red">*</span>
                 </label>
@@ -73,7 +75,3 @@ export default class Package extends React.Component {
         );
     }
 }
-
-Package.propTypes = {
-    params: React.PropTypes.func.isRequired
-};
