@@ -1,7 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import StatePicker from './StatePicker';
 import Services from './Services';
 import Formatters from 'utils/Formatters';
+import RouterContainer from '../services/RouterContainer';
+import History from 'utils/History';
 
 export default class Student extends React.Component {
     constructor(props) {
@@ -36,7 +39,7 @@ export default class Student extends React.Component {
         } else {
             Services.updateStudent(this.state.id, this.state.student);
         }
-        this.context.router.transitionTo('/students');
+        history.pushState(null, '/students');
     }
     
     render() {
@@ -89,17 +92,18 @@ export default class Student extends React.Component {
                 <label htmlFor="secondaryPhone">Secondary Phone</label>
                   <input id="secondaryPhone" type="tel"
                     className="block col-12 mb1 field" 
-                    value={this.state.student.secondaryPhone}/>
+                    value={this.state.student.secondaryPhone}
+                    onChange={this._handleStudentFieldUpdate}/>
               
-                <label htmlFor="line1">
+                <label htmlFor="addressLine1">
                   Street Address</label>
-                  <input id="line1" type="text" 
+                  <input id="addressLine1" type="text" 
                     className="block col-12 mb1 field"
                     value={this.state.student.addressLine1} 
                     onChange={this._handleStudentFieldUpdate}/>
               
-                <label htmlFor="line2">Apartment/Suite #</label>
-                  <input id="line2" type="text" 
+                <label htmlFor="addressLine2">Apartment/Suite #</label>
+                  <input id="addressLine2" type="text" 
                   className="block col-12 mb1 field"
                     value={this.state.student.addressLine2} 
                     onChange={this._handleStudentFieldUpdate}/>
@@ -113,62 +117,10 @@ export default class Student extends React.Component {
               
                 <label htmlFor="state">
                   State</label>
-                  <select id="state" 
+                <StatePicker id="state" 
                     className="block col-3 mb1 field"
-                  value={this.state.student.state} 
-                    onChange={this._handleStudentFieldUpdate}>
-                    <option value="AL">Alabama</option>
-                      <option value="AK">Alaska</option>
-                      <option value="AZ">Arizona</option>
-                      <option value="AR">Arkansas</option>
-                      <option value="CA">California</option>
-                      <option value="CO">Colorado</option>
-                      <option value="CT">Connecticut</option>
-                      <option value="DE">Delaware</option>
-                      <option value="DC">District Of Columbia</option>
-                      <option value="FL">Florida</option>
-                      <option value="GA">Georgia</option>
-                      <option value="HI">Hawaii</option>
-                      <option value="ID">Idaho</option>
-                      <option value="IL">Illinois</option>
-                      <option value="IN">Indiana</option>
-                      <option value="IA">Iowa</option>
-                      <option value="KS">Kansas</option>
-                      <option value="KY">Kentucky</option>
-                      <option value="LA">Louisiana</option>
-                      <option value="ME">Maine</option>
-                      <option value="MD">Maryland</option>
-                      <option value="MA">Massachusetts</option>
-                      <option value="MI">Michigan</option>
-                      <option value="MN">Minnesota</option>
-                      <option value="MS">Mississippi</option>
-                      <option value="MO">Missouri</option>
-                      <option value="MT">Montana</option>
-                      <option value="NE">Nebraska</option>
-                      <option value="NV">Nevada</option>
-                      <option value="NH">New Hampshire</option>
-                      <option value="NJ">New Jersey</option>
-                      <option value="NM">New Mexico</option>
-                      <option value="NY">New York</option>
-                      <option value="NC">North Carolina</option>
-                      <option value="ND">North Dakota</option>
-                      <option value="OH">Ohio</option>
-                      <option value="OK">Oklahoma</option>
-                      <option value="OR">Oregon</option>
-                      <option value="PA">Pennsylvania</option>
-                      <option value="RI">Rhode Island</option>
-                      <option value="SC">South Carolina</option>
-                      <option value="SD">South Dakota</option>
-                      <option value="TN">Tennessee</option>
-                      <option value="TX">Texas</option>
-                      <option value="UT">Utah</option>
-                      <option value="VT">Vermont</option>
-                      <option value="VA">Virginia</option>
-                      <option value="WA">Washington</option>
-                      <option value="WV">West Virginia</option>
-                      <option value="WI">Wisconsin</option>
-                      <option value="WY">Wyoming</option>
-                  </select>
+                    value={this.state.student.state} 
+                    onChange={this._handleStudentFieldUpdate}/>
               
                 <label htmlFor="zipcode">
                   Zipcode</label>
@@ -185,7 +137,3 @@ export default class Student extends React.Component {
         );
     }
 }
-
-Student.propTypes = {
-    params: React.PropTypes.func.isRequired
-};

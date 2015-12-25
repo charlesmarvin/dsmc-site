@@ -42,7 +42,7 @@ export default {
     },
     
     updateStudent(id, student) {
-        return r('patch', SECURE_API_CONTEXT + 'students/' + id, student);
+        return r('put', SECURE_API_CONTEXT + 'students/' + id, student);
     },
     
     getInstructors() {
@@ -58,7 +58,7 @@ export default {
     },
     
     updateInstructor(id, instructor) {
-        return r('patch', SECURE_API_CONTEXT + 'instructors/' + id, instructor);
+        return r('put', SECURE_API_CONTEXT + 'instructors/' + id, instructor);
     },
     
     getPackages() {
@@ -74,6 +74,6 @@ export default {
     },
     
     updatePackage(id, pkg) {
-        return r('patch', SECURE_API_CONTEXT + 'packages/' + id, pkg);
+        return r('put', SECURE_API_CONTEXT + 'packages/' + id, pkg);
     }
 };
