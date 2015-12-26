@@ -4,13 +4,12 @@ import StatePicker from './StatePicker';
 import Services from './Services';
 import Formatters from 'utils/Formatters';
 import RouterContainer from '../services/RouterContainer';
-import History from 'utils/History';
 
 export default class Student extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: 'new',
+            id: '',
             student: {}
         };
         this._handleStudentFieldUpdate = this._handleStudentFieldUpdate.bind(this);
@@ -19,7 +18,7 @@ export default class Student extends React.Component {
     
     componentWillMount() {
         var {id} = this.props.params;
-        if (!_.isEmpty(id) && id !== 'new') {
+        if (!(_.isEmpty(id) || id === 'new')) {
             this.setState({id});
             Services.getStudent(id).then(function(data) {
                 this.setState({student: data});
@@ -34,18 +33,17 @@ export default class Student extends React.Component {
     
     _handleSave(event) {
         event.preventDefault();
-        if (this.state.id === 'new') {
+        if (_.isEmpty(this.state.id)) {
             Services.createStudent(this.state.student);
         } else {
             Services.updateStudent(this.state.id, this.state.student);
         }
-        history.pushState(null, '/students');
+        this.props.history.pushState(null, '/students');
     }
     
     render() {
         return (
-          <div className="p2">
-            <form className="forms md-col-6" onSubmit={this._handleSave} noValidate>
+            <form className="forms md-col-6 p2" onSubmit={this._handleSave} noValidate>
               <label htmlFor="first-name">First Name <span className="red">*</span></label>
               <input id="firstName" type="text" 
                     className="block col-12 mb1 field"
@@ -130,10 +128,9 @@ export default class Student extends React.Component {
                     onChange={this._handleStudentFieldUpdate}/>
               
 
-            <button type="submit" className="btn btn-primary mr1">Save</button>
+            <button type="submit" className="btn btn-primary">Save</button>
             <button type="reset" className="btn">Cancel</button>
           </form>
-        </div>
         );
     }
 }

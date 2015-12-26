@@ -29,12 +29,12 @@ export default class AddItemView extends React.Component {
             break;
         case PACKAGE_TAB:
             packageTabClass = 'border-bottom';
-            content = <Package params={()=> null}/>;
+            content = <Package />;
             break;
         case STUDENT_TAB:
         default:
             studentTabClass = 'border-bottom';
-            content = <Student params={()=> null}/>;
+            content = <Student />;
             break;
         }
         return (
@@ -48,7 +48,7 @@ export default class AddItemView extends React.Component {
                         <a onClick={(e) => this._switchTab(e, PACKAGE_TAB)} 
                             className={'btn ' + packageTabClass}>Add New Package</a>
                     </nav>
-                    <div className="p2">
+                    <div>
                        {content}
                     </div>
                 </div>
