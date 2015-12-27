@@ -18,6 +18,8 @@ const Student = require('./Student');
 const Admin = require('./Admin');
 const Login = require('./Login');
 const AddItemView = require('./AddItemView');
+const InstructorsTableView = require('./InstructorsTableView');
+const InstructorView = require('./InstructorView');
 
 var router = (
     <Router history={History}>
@@ -27,10 +29,11 @@ var router = (
             <Route path="package" path="package/:id" component={Package} onEnter={requireAuth}/>
             <Route path="students" component={Students} onEnter={requireAuth}/>
             <Route path="student/:id" component={Student} onEnter={requireAuth}/>
-            <Route path="instructors" component={NotFound} onEnter={requireAuth}/>
+            <Route path="instructors" component={InstructorsTableView} onEnter={requireAuth}/>
+            <Route path="instructor/:id" component={InstructorView} onEnter={requireAuth}/>
             <Route path="admin" component={Admin} onEnter={requireAuth}/>
+            <Route path="add" component={AddItemView} onEnter={requireAuth}/>
             <Route path="login" component={Login}/>
-            <Route path="add" component={AddItemView}/>
             <Route path="*" component={NotFound}/>
         </Route>
     </Router>

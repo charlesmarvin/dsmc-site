@@ -3,7 +3,9 @@ import {
     DASHBOARD_REQUEST_SUCCESS, 
     DASHBOARD_REQUEST_FAILURE,
     STUDENTS_REQUEST_SUCCESS,
-    STUDENTS_REQUEST_FAILURE
+    STUDENTS_REQUEST_FAILURE,
+    INSTRUCTORS_REQUEST_SUCCESS,
+    INSTRUCTORS_REQUEST_FAILURE
 } from '../constants/AppConstants';
 import BaseStore from './BaseStore';
 
@@ -18,6 +20,7 @@ class DashboardStore extends BaseStore {
         this._studentsByPackageCount = {};
         this._studentsByInstructorCount = {};
         this._students = [];
+        this._instructors = [];
     }
 
     _onAction(action) {
@@ -45,6 +48,13 @@ class DashboardStore extends BaseStore {
         case STUDENTS_REQUEST_FAILURE:
             this.emitChange();
             break;
+        case INSTRUCTORS_REQUEST_SUCCESS:
+            this._instructors = action.instructors;
+            this.emitChange();
+            break;
+        case INSTRUCTORS_REQUEST_FAILURE:
+            this.emitChange();
+            break;
         default:
             break;
         }
@@ -64,6 +74,10 @@ class DashboardStore extends BaseStore {
 
     get students() {
         return this._students;
+    }
+
+    get instructors() {
+        return this._instructors;
     }
 }
 
