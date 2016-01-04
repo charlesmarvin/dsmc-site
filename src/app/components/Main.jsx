@@ -42,6 +42,9 @@ export default class Main extends React.Component {
         if (this.state.isLoggedIn) {
             navLinks = (
                 <span>
+                    <Link to="/add" className="btn py2 gray bg-darken-1" title="Add new Student/Package/Instructor">
+                        +
+                    </Link>
                     <Link to="/students" activeClassName="border-bottom" className="btn py2" title="View All Students">Students</Link>
                     <Link to="/packages" activeClassName="border-bottom" className="btn py2" title="View All Packages">Packages</Link>
                     <Link to="/instructors" activeClassName="border-bottom" className="btn py2" title="View All Instructors">Instructors</Link>
@@ -56,9 +59,6 @@ export default class Main extends React.Component {
                 <nav className="clearfix mb1">
                   <div className="sm-col">
                     <Link to="/" className="btn py2 caps bg-black white">Driver A</Link>
-                    <Link to="/add" className="btn py2 gray bg-darken-1" title="Add new Student/Package/Instructor">
-                        +
-                    </Link>
                     {navLinks}
                   </div>
                   <div className="sm-col-right">
