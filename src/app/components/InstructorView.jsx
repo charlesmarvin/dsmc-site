@@ -54,11 +54,11 @@ export default class InstructorView extends React.Component {
                     value={this.state.instructor.lastName} 
                     onChange={this._handleFieldUpdate}/>
 
-              <label htmlFor="certifiedOn">Certification Date <span className="red">*</span>
+              <label htmlFor="certificationDate">Certification Date <span className="red">*</span>
                 <span className="small muted">YYYY-MM-DD</span></label>
-              <input id="certifiedOn" type="text"
+              <input id="certificationDate" type="text"
                     className="block col-4 mb1 field" 
-                    value={this.state.instructor.certifiedOn} 
+                    value={this.state.instructor.certificationDate} 
                     onChange={this._handleFieldUpdate}/>
             
                 <label htmlFor="email">
