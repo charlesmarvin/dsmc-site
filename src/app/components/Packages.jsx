@@ -57,13 +57,19 @@ export default class Packages extends React.Component {
     }
     
     render() {
-        return (
-            <div>
-                <DataGridToolbar filterHandler={this._handleSearch} />
-                <DataGrid data={this.state.packages} columnConfigs={this.columnConfigs} 
-                    filter={this.state.filter} />
-            </div>
-        );
+        let activeView = this.props.children;
+        if (!activeView) {
+            activeView = (
+                <div>
+                    <DataGridToolbar filterHandler={this._handleSearch} 
+                        newRecordLink={"/package/new"}
+                        newRecordLinkText={"Add Package"} />
+                    <DataGrid data={this.state.packages} columnConfigs={this.columnConfigs} 
+                        filter={this.state.filter} />
+                </div>
+            );
+        }
+        return (activeView);
     }
 
 }

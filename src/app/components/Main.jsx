@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import LoginStore from '../stores/LoginStore';
 import LoginActions from '../actions/LoginActions';
-import AddItemView from './AddItemView';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -42,9 +41,6 @@ export default class Main extends React.Component {
         if (this.state.isLoggedIn) {
             navLinks = (
                 <span>
-                    <Link to="/add" className="btn py2 gray bg-darken-1" title="Add new Student/Package/Instructor">
-                        +
-                    </Link>
                     <Link to="/students" activeClassName="border-bottom" className="btn py2" title="View All Students">Students</Link>
                     <Link to="/packages" activeClassName="border-bottom" className="btn py2" title="View All Packages">Packages</Link>
                     <Link to="/instructors" activeClassName="border-bottom" className="btn py2" title="View All Instructors">Instructors</Link>

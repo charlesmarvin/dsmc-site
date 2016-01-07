@@ -86,12 +86,18 @@ export default class InstructorsTableView extends React.Component {
     }
     
     render() {
-        var gridData = this._transform(this.state.instructors);
-        return (
-            <div>
-                <DataGridToolbar filterHandler={this._handleSearch} />
-                <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
-            </div>
-        );
+        let activeView = this.props.children;
+        if (!activeView) {
+            let gridData = this._transform(this.state.instructors);
+            activeView = (
+                <div>
+                    <DataGridToolbar filterHandler={this._handleSearch} 
+                        newRecordLink={"/instructor/new"}
+                        newRecordLinkText={"Add Instructor"} />
+                    <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
+                </div>
+            );
+        }
+        return (activeView);
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Link} from 'react-router';
 
 export default class GridToolBar extends React.Component {
     constructor(props) {
@@ -19,27 +20,23 @@ export default class GridToolBar extends React.Component {
     }
     
     render() {
-        var print = '';
+        let print = '';
         if (this.props.enablePrint) {
             print = (
-                <li key="print" className="inline-block mr1">
-                    <a title="Print" data-theme="blue" data-tools="tooltip" onClick={this._handlePrint}>
-                        Print
-                      </a>
-                </li>
+                <a title="Print" className="btn blue" data-tools="tooltip" onClick={this._handlePrint}>
+                    Print
+                </a>
             );
         }
-        var download = '';
+        let download = '';
         if (this.props.enableDownload) {
             download = (
-                <li key="download" className="inline-block mr1">
-                    <a title="Download" data-theme="blue" data-tools="tooltip">
-                        Download 
-                    </a>
-                </li>
+                <a title="Download" className="btn blue" data-tools="tooltip">
+                    Download 
+                </a>
             );
         }
-        var searchWidget = '';
+        let searchWidget = '';
         if (this.props.enableFilter) {
             searchWidget = (
                 <form className="right" onSubmit={this._handleSearch}>
@@ -49,13 +46,21 @@ export default class GridToolBar extends React.Component {
                 </form>
             );
         }
+        let newRecordLink = '';
+        if (this.props.newRecordLink) {
+            let linkText = this.props.newRecordLinkText || 'Add';
+            newRecordLink = (
+                <Link to={this.props.newRecordLink} className="btn btn-primary mb1 bg-green">
+                    {linkText}
+                </Link>
+            );
+        }
         return (
             <header className="px2">
                 <nav className="left">
-                    <ul className="list-reset">
+                    {newRecordLink}
                     {print}
                     {download}
-                    </ul>
                 </nav>
                 {searchWidget}
             </header>
@@ -68,7 +73,9 @@ GridToolBar.propTypes = {
     enablePrint: React.PropTypes.bool,
     enableDownload: React.PropTypes.bool,
     enableFilter: React.PropTypes.bool,
-    enableAdd: React.PropTypes.bool
+    enableAdd: React.PropTypes.bool,
+    newRecordLink: React.PropTypes.string,
+    newRecordLinkText: React.PropTypes.string
 };
 
 GridToolBar.defaultProps = {
@@ -76,5 +83,7 @@ GridToolBar.defaultProps = {
     enableDownload: true,
     enableFilter: true,
     enableAdd: true,
+    newRecordLink: '',
+    newRecordLinkText: '',
     filterHandler() {} //no-op filter handler
 };

@@ -66,7 +66,7 @@ export default class Students extends React.Component {
         this.setState({students: DashboardStore.students});
     }
     
-    _enrichStudentData(data) {
+    _transform(data) {
         return data.map(function(datum) {
             var enrichedRecord = datum;
             enrichedRecord.fullName = [ datum.firstName, datum.lastName ].join(' ');
@@ -86,12 +86,18 @@ export default class Students extends React.Component {
     }
     
     render() {
-        var gridData = this._enrichStudentData(this.state.students);
-        return (
-            <div>
-                <DataGridToolbar filterHandler={this._handleSearch} />
-                <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
-            </div>
-        );
+        let activeView = this.props.children;
+        if (!activeView) {
+            let gridData = this._transform(this.state.students);
+            activeView = (
+                <div>
+                    <DataGridToolbar filterHandler={this._handleSearch} 
+                        newRecordLink={"/student/new"}
+                        newRecordLinkText={"Add Student"} />
+                    <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
+                </div>
+            );
+        }
+        return (activeView);
     }
 }
