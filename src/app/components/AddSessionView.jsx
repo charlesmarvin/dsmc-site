@@ -94,8 +94,9 @@ export default class AddSessionView extends React.Component {
                     <div className="md-col-3 p1">
                         <label>Appointment Date and Time</label>
                         <div className="relative">
-                            <input type="date" placeholder="1/15/2016 12:30 PM" 
-                                className="block mb1 field col-12"
+                            <input className="block mb1 field col-12"
+                                type="datetime-local" 
+                                placeholder="1/15/2016 12:30 PM" 
                                 value={this.state.sessionDatetime} 
                                 onChange={(event) => this._onDateTimeChanged(event)}/>
                             <span className="absolute">
