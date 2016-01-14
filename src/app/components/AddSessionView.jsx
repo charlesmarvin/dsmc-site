@@ -71,8 +71,8 @@ export default class AddSessionView extends React.Component {
         let selectedDateTimePreview = (dt && dt.isValid()) ? dt.calendar(null, {sameElse: 'M/D/YYYY h:mm a'}) : '';
         return (
             <form className="forms p2 fit">
-                <div className="flex flex-end">
-                    <div className="flex-grow mr2">
+                <div className="flex flex-wrap flex-end">
+                    <div className="md-col-3 p1">
                         <label>Student</label>
                         <select className="block mb1 field col-12" 
                             value={this.state.studentId} 
@@ -81,7 +81,7 @@ export default class AddSessionView extends React.Component {
                             {studentOptions}
                         </select>
                     </div>
-                    <div className="flex-grow mr2">
+                    <div className="md-col-3 p1">
                         <label>Instructor</label>
                         <select className="block mb1 field col-12"
                             value={this.state.instructorId}  
@@ -91,8 +91,8 @@ export default class AddSessionView extends React.Component {
                         </select>
                     </div>
 
-                    <div className="flex-grow mr2">
-                        <label>Appointment Date and Time <span className="regular muted caps h6">MM/DD/YYYY HH:MM</span></label>
+                    <div className="md-col-3 p1">
+                        <label>Appointment Date and Time</label>
                         <div className="relative">
                             <input type="date" placeholder="1/15/2016 12:30 PM" 
                                 className="block mb1 field col-12"
@@ -104,7 +104,7 @@ export default class AddSessionView extends React.Component {
                         </div>
                     </div>
 
-                    <div className="p1 flex-none">
+                    <div className="flex-none p2">
                         <button type="submit" className="btn btn-primary" disabled={!this._isValid()} onClick={(event) => this._onSave(event)}>Save</button>
                         <button type="reset" className="btn" onClick={(event) => this._onCancel(event)}>Cancel</button>
                     </div>
