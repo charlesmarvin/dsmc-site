@@ -38,6 +38,19 @@ export default class AddSessionView extends React.Component {
             instructorId: this.state.instructorId,
             sessionDatetime: this.state.selectedDateTime.toDate()
         });
+        this._clear();
+    }
+    _onCancel(event) {
+        event.preventDefault();
+        this._clear();
+    }
+    _clear() {
+        this.setState({
+            studentId: '',
+            instructorId: '',
+            sessionDatetime: null,
+            selectedDateTime: null
+        });
     }
 
     _isValid() {
@@ -93,7 +106,7 @@ export default class AddSessionView extends React.Component {
 
                     <div className="p1 flex-none">
                         <button type="submit" className="btn btn-primary" disabled={!this._isValid()} onClick={(event) => this._onSave(event)}>Save</button>
-                        <button type="reset" className="btn">Cancel</button>
+                        <button type="reset" className="btn" onClick={(event) => this._onCancel(event)}>Cancel</button>
                     </div>
                 </div>
             </form>
