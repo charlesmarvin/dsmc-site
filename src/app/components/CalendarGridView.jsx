@@ -6,7 +6,11 @@ export class Day extends React.Component {
         let todayClass = (this.props.isToday ? ' today bold bg-darken-2' : '');
         let differentMonthClass = (this.props.isCurrentMonth ? '' : ' different-month silver');
         let selectedDateClass = (this.props.isSelected ? ' selected bg-darken-1' : '');
-        let activity = (this.props.sessions.length) ? <span className="h3 green">&#9679;</span> : <span>&nbsp;</span>;
+        let activity = <span>&nbsp;</span>;
+        if (this.props.sessions.length) {
+            let sessionDetails = this.props.sessions.map((s) => `${s.instructorFullName} is scheduled to instruct ${s.studentFullName} at ${moment(s.sessionDateTime).format('LT')}`).join('. ');
+            activity = <span className="h3 green tooltip" title={sessionDetails}>&#9679;</span>;
+        }
         return (
             <td className={'p2 center day pb1' + differentMonthClass + selectedDateClass + todayClass} 
                 onClick={() => this.props.select(this.props.date)}>
