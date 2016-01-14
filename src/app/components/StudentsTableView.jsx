@@ -7,7 +7,7 @@ import DataGridToolbar from 'components/grid/DataGridToolbar';
 import DashboardActions from '../actions/DashboardActions';
 import DashboardStore from '../stores/DashboardStore';
 
-export default class StudentTable extends React.Component {
+export default class StudentsTableView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ export default class StudentTable extends React.Component {
         this.setState({students: DashboardStore.students});
     }
     
-    _enrichStudentData(data) {
+    _transform(data) {
         return data.map(function(datum) {
             var enrichedRecord = datum;
             enrichedRecord.fullName = [ datum.firstName, datum.lastName ].join(' ');
@@ -73,15 +73,18 @@ export default class StudentTable extends React.Component {
     }
     
     render() {
-        var newEntryLink = (<Link to={'/student/new'}>
-                <i className="fa fa-plus" title="New Student"></i>
-            </Link>);
-        var gridData = this._enrichStudentData(this.props.students);
-        return (
-            <div>
-                <DataGridToolbar newEntryLink={newEntryLink} filterHandler={this._handleSearch} />
-                <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
-            </div>
-        );
+        let activeView = this.props.children;
+        if (!activeView) {
+            let gridData = this._transform(this.state.students);
+            activeView = (
+                <div>
+                    <DataGridToolbar filterHandler={this._handleSearch} 
+                        newRecordLink={"/student/new"}
+                        newRecordLinkText={"Add Student"} />
+                    <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
+                </div>
+            );
+        }
+        return (activeView);
     }
 }

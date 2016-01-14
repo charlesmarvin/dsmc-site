@@ -21,6 +21,7 @@ class DashboardStore extends BaseStore {
         this._studentsByInstructorCount = {};
         this._students = [];
         this._instructors = [];
+        this._instructionSessions = [];
     }
 
     _onAction(action) {
@@ -35,6 +36,8 @@ class DashboardStore extends BaseStore {
             this._studentsByPackageCount = action.studentsByPackageCount || {};
             this._studentsByInstructorCount = action.studentsByInstructorCount || {};
             this._students = action.students || [];
+            this._instructors = action.instructors || [];
+            this._instructionSessions = action.instructionSessions || [];
             this.emitChange();
             break;
         case DASHBOARD_REQUEST_FAILURE:
@@ -78,6 +81,10 @@ class DashboardStore extends BaseStore {
 
     get instructors() {
         return this._instructors;
+    }
+
+    get instructionSessions() {
+        return this._instructionSessions;
     }
 }
 

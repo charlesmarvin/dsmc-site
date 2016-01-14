@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 import _ from 'lodash';
+import moment from 'moment';
 import Highcharts from 'react-highcharts/dist/bundle/highcharts';
 import DashboardActions from '../actions/DashboardActions';
 import DashboardStore from '../stores/DashboardStore';
-import StudentTable from './StudentTable';
+import CalendarGridView from './CalendarGridView';
+import AddSessionView from './AddSessionView';
+import Service from './Services';
 
 const baseChartConfig = {
     chart: {
@@ -52,7 +55,9 @@ export default class Dashboard extends React.Component {
             studentsByGenderCount: {},
             studentsByPackageCount: {},
             studentsByInstructorCount: {},
-            students: []
+            students: [],
+            instructors: [],
+            instructionSessions: []
         };
         this._onDashboardDataChanged = this._onDashboardDataChanged.bind(this);
     }
@@ -75,8 +80,14 @@ export default class Dashboard extends React.Component {
             studentsByGenderCount: DashboardStore.studentsByGenderCount,
             studentsByPackageCount: DashboardStore.studentsByPackageCount,
             studentsByInstructorCount: DashboardStore.studentsByInstructorCount,
-            students: DashboardStore.students
+            students: DashboardStore.students,
+            instructors: DashboardStore.instructors,
+            instructionSessions: DashboardStore.instructionSessions
         });
+    }
+
+    _onSessionSave(session) {
+        Service.saveSession(session);    
     }
 
     render() {
@@ -144,7 +155,11 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <StudentTable students={this.state.students}/>
+                <AddSessionView 
+                    students={this.state.students} 
+                    instructors={this.state.instructors}
+                    onSave={(e) => this._onSessionSave(e)} />
+                <CalendarGridView sessions={this.state.instructionSessions} selected={moment().startOf('day')}/>
             </div>
         );
     }

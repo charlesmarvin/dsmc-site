@@ -75,5 +75,9 @@ export default {
     
     updatePackage(id, pkg) {
         return r('put', SECURE_API_CONTEXT + 'packages/' + id, pkg);
+    },
+
+    saveSession(session) {
+        return r('post', SECURE_API_CONTEXT + 'instructionSessions', session);
     }
 };
