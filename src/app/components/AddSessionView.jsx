@@ -70,7 +70,7 @@ export default class AddSessionView extends React.Component {
         let dt = this.state.selectedDateTime;
         let selectedDateTimePreview = (dt && dt.isValid()) ? dt.calendar(null, {sameElse: 'M/D/YYYY h:mm a'}) : '';
         return (
-            <form className="forms p2 fit" novalidate>
+            <form className="forms p2 fit" noValidate>
                 <div className="flex flex-wrap flex-end">
                     <div className="md-col-3 p1">
                         <label>Student</label>
