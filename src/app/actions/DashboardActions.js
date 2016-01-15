@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher.js';
 import {
-    SECURE_API_CONTEXT, 
+    API_CONTEXT, 
     DASHBOARD_REQUESTED, 
     DASHBOARD_REQUEST_SUCCESS, 
     DASHBOARD_REQUEST_FAILURE,
@@ -18,7 +18,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: DASHBOARD_REQUESTED
         });
-        return get(SECURE_API_CONTEXT + 'dashboard')
+        return get(API_CONTEXT + 'dashboard')
         .then((data) => {
             console.debug('Dashboard data loaded successfully.');
             AppDispatcher.dispatch({
@@ -36,7 +36,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: STUDENTS_REQUESTED
         });
-        return get(SECURE_API_CONTEXT + 'students')
+        return get(API_CONTEXT + 'students')
         .then((data) => {
             console.debug('Students loaded successfully.');
             AppDispatcher.dispatch({
@@ -54,7 +54,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: INSTRUCTORS_REQUESTED
         });
-        return get(SECURE_API_CONTEXT + 'instructors')
+        return get(API_CONTEXT + 'instructors')
         .then((data) => {
             console.debug('instructors loaded successfully.');
             AppDispatcher.dispatch({

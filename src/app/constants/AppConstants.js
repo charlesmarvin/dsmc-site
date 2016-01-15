@@ -4,7 +4,6 @@ if (document.location.hostname === 'localhost') {
 }
 export default {
     API_CONTEXT: baseurl + '/api/',
-    SECURE_API_CONTEXT: baseurl + '/api/s/',
     JSON_HEADERS: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

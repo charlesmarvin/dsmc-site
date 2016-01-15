@@ -15,9 +15,7 @@ const TO_JSON = function(response) {
 
 function r(method, url, data) {
     var headers = Object.assign({}, JSON_HEADERS);
-    if (LoginStore.jwt) {
-        Object.assign(headers, {Authorization: 'Bearer ' + LoginStore.jwt});
-    }
+    Object.assign(headers, {Authorization: 'Bearer ' + LoginStore.jwt});
     var options = {
         method,
         headers
