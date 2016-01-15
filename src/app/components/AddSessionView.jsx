@@ -13,7 +13,7 @@ export default class AddSessionView extends React.Component {
         };
     }
     _getMomentFromTime(value) {
-        return moment(value, ['HH:mm', 'h:mm a', 'M/D/YYYY HH:mm', 'M/D/YYYY h:mm a', 'M-D-YYYY h:mm a'], true);
+        return moment(value, ['HH:mm', 'h:mm a', 'M/D/YYYY HH:mm', 'M/D/YYYY h:mm a', 'M-D-YYYY h:mm a', 'YYYY-MM-DDTHH:mm:ss', 'YYYY-MM-DDTHH:mm'], true);
     }
     _onStudentSelected(event) {
         this.setState({studentId: event.target.value});
