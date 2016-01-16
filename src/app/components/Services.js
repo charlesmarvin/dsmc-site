@@ -4,7 +4,6 @@ import LoginStore from '../stores/LoginStore';
 const host = (document.location.hostname === 'localhost') ? 'http://localhost:8080' 
     : 'http://dsmc-api.cfapps.io';
 const API_CONTEXT = host + '/api/';
-const SECURE_API_CONTEXT = API_CONTEXT + 's/';
 const JSON_HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -28,54 +27,54 @@ function r(method, url, data) {
 
 export default {
     getStudents() {
-        return r('get', SECURE_API_CONTEXT + 'students');
+        return r('get', API_CONTEXT + 'students');
     },
     
     getStudent(id) {
-        return r('get', SECURE_API_CONTEXT + 'students/' + id);
+        return r('get', API_CONTEXT + 'students/' + id);
     },
     
     createStudent(student) {
-        return r('post', SECURE_API_CONTEXT + 'students', student);
+        return r('post', API_CONTEXT + 'students', student);
     },
     
     updateStudent(id, student) {
-        return r('put', SECURE_API_CONTEXT + 'students/' + id, student);
+        return r('put', API_CONTEXT + 'students/' + id, student);
     },
     
     getInstructors() {
-        return r('get', SECURE_API_CONTEXT + 'instructors');
+        return r('get', API_CONTEXT + 'instructors');
     },
     
     getInstructor(id) {
-        return r('get', SECURE_API_CONTEXT + 'instructors/' + id);
+        return r('get', API_CONTEXT + 'instructors/' + id);
     },
     
     createInstructor(instructor) {
-        return r('post', SECURE_API_CONTEXT + 'instructors', instructor);
+        return r('post', API_CONTEXT + 'instructors', instructor);
     },
     
     updateInstructor(id, instructor) {
-        return r('put', SECURE_API_CONTEXT + 'instructors/' + id, instructor);
+        return r('put', API_CONTEXT + 'instructors/' + id, instructor);
     },
     
     getPackages() {
-        return r('get', SECURE_API_CONTEXT + 'packages');
+        return r('get', API_CONTEXT + 'packages');
     },
     
     getPackage(id) {
-        return r('get', SECURE_API_CONTEXT + 'packages/' + id);
+        return r('get', API_CONTEXT + 'packages/' + id);
     },
     
     createPackage(pkg) {
-        return r('post', SECURE_API_CONTEXT + 'packages', pkg);
+        return r('post', API_CONTEXT + 'packages', pkg);
     },
     
     updatePackage(id, pkg) {
-        return r('put', SECURE_API_CONTEXT + 'packages/' + id, pkg);
+        return r('put', API_CONTEXT + 'packages/' + id, pkg);
     },
 
     saveSession(session) {
-        return r('post', SECURE_API_CONTEXT + 'instructionSessions', session);
+        return r('post', API_CONTEXT + 'instructionSessions', session);
     }
 };
