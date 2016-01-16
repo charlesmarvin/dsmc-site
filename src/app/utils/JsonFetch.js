@@ -17,7 +17,8 @@ function doFetch(method, url, data = null) {
     }
     var options = {
         method,
-        headers
+        headers,
+        mode: 'cors'
     };
     if (data) {
         options.body = JSON.stringify(data);
