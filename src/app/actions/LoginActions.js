@@ -27,7 +27,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: LOGIN_REQUESTED
         });
-        return post(API_CONTEXT + 'login', {username, password})
+        return post(API_CONTEXT + 'auth/login', {username, password})
         .then((data) => {
             console.debug('User [' + username + '] logged in successfully.');
             var savedJwt = localStorage.getItem('jwt');
