@@ -11,7 +11,8 @@ export default class StudentsTableView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: ''
+            filter: '',
+            students: []
         };
         this.columnConfigs = [
             {
@@ -45,9 +46,21 @@ export default class StudentsTableView extends React.Component {
                 format: Formatters.phoneNumber
             }
         ];
+        this._onDataLoaded = this._onDataLoaded.bind(this);
         this._handleSearch = this._handleSearch.bind(this);
     }
     
+    componentWillMount() {
+        DashboardStore.addChangeListener(this._onDataLoaded);
+    }
+
+    componentDidMount() {
+        DashboardActions.loadStudents();
+    }
+    
+    componentWillUnmount() {
+        DashboardStore.removeChangeListener(this._onDataLoaded);
+    }
 
     _onDataLoaded() {
         this.setState({students: DashboardStore.students});
