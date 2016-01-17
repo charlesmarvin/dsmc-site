@@ -31,6 +31,14 @@ export default class Login extends React.Component {
     }
 
     _onAuthStateChanged() {
+        // if (LoginStore.isLoggedIn) {
+        //     if (this.props.history.state && this.props.history.state.nextPathname) {
+        //         this.props.history.replaceState(null, this.props.history.state.nextPathname);
+        //     } else {
+        //         this.props.history.replaceState(null, '/');
+        //     }
+        //     return;
+        // }
         this.setState({
             hasLoginError: LoginStore.hasError,
             loading: LoginStore.isLoading
