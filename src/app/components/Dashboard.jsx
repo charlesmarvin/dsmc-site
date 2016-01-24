@@ -113,7 +113,7 @@ export default class Dashboard extends React.Component {
         return (
             <div>
                 <div className="md-flex flex-justify">
-                    <div className="flex-auto m2">
+                    <div className="flex-auto">
                         <div>
                             <Highcharts config={chart1} ref="studentsByGenderChart"/>
                         </div>
@@ -127,7 +127,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
 
-                    <div className="flex-auto m2">
+                    <div className="flex-auto">
                         <div>
                             <Highcharts config={chart2} ref="packagesByStudentsChart"/>
                         </div>
@@ -141,7 +141,7 @@ export default class Dashboard extends React.Component {
                         </Link>
                     </div>
 
-                    <div className="flex-auto m2"> 
+                    <div className="flex-auto"> 
                         <div>
                             <Highcharts config={chart3} ref="instructorsByStudentsChart"/>
                         </div>
