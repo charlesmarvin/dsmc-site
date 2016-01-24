@@ -14,7 +14,7 @@
   "mainOutput": "main",
   "dependencies": {
     "babel-runtime": "^5.8.34",
-    "basscss": "^7.0.4",
+    "basscss-sass": "^3.0.0",
     "console-polyfill": "^0.2.2",
     "flux": "^2.1.1",
     "history": "1.17.0",
@@ -28,6 +28,7 @@
     "react-dom": "^0.14.2",
     "react-highcharts": "^6.0.0",
     "react-router": "^1.0.2",
+    "spinkit": "^1.2.5",
     "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {
