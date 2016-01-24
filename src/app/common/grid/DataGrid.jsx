@@ -1,6 +1,6 @@
 import React from 'react';
-import Formatters from 'utils/Formatters';
-import ObjUtils from 'utils/ObjUtils';
+import Formatters from 'app/common/utils/Formatters';
+import ObjUtils from 'app/common/utils/ObjUtils';
 
 class DataGridHeader extends React.Component {
     constructor(props) {

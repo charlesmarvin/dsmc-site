@@ -1,18 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router';
 import _ from 'lodash';
-import Formatters from 'utils/Formatters';
-import DataGrid from 'components/grid/DataGrid';
-import DataGridToolbar from 'components/grid/DataGridToolbar';
-import DashboardActions from '../actions/DashboardActions';
-import DashboardStore from '../stores/DashboardStore';
+import Formatters from 'app/common/utils/Formatters';
+import DataGrid from 'app/common/grid/DataGrid';
+import DataGridToolbar from 'app/common/grid/DataGridToolbar';
+import DashboardActions from 'app/dashboard/DashboardActions';
+import DashboardStore from 'app/dashboard/DashboardStore';
 
-export default class Students extends React.Component {
+export default class InstructorsTableView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            students: [],
-            filter: ''
+            filter: '',
+            instructors: []
         };
         this.columnConfigs = [
             {
@@ -20,15 +20,15 @@ export default class Students extends React.Component {
                 name: 'Name',
                 render(val, context, id) {
                     return (
-                        <Link to={`/student/${id}`} className="grid-item-edit-link">
+                        <Link to={`/instructor/${id}`} className="grid-item-edit-link">
                             {val} 
                         </Link>
                     );
                 }
             },
             {
-                field: 'dob',
-                name: 'DOB',
+                field: 'certificationDate',
+                name: 'Certified On',
                 format(val) {
                     return Formatters.date(val, 'MM/DD/YY');
                 }
@@ -46,16 +46,16 @@ export default class Students extends React.Component {
                 format: Formatters.phoneNumber
             }
         ];
-        this._onDataLoaded = this._onDataLoaded.bind(this);
         this._handleSearch = this._handleSearch.bind(this);
+        this._onDataLoaded = this._onDataLoaded.bind(this);
     }
-    
+
     componentWillMount() {
         DashboardStore.addChangeListener(this._onDataLoaded);
     }
 
     componentDidMount() {
-        DashboardActions.loadStudents();
+        DashboardActions.loadInstructors();
     }
     
     componentWillUnmount() {
@@ -63,7 +63,7 @@ export default class Students extends React.Component {
     }
 
     _onDataLoaded() {
-        this.setState({students: DashboardStore.students});
+        this.setState({instructors: DashboardStore.instructors});
     }
     
     _transform(data) {
@@ -88,12 +88,12 @@ export default class Students extends React.Component {
     render() {
         let activeView = this.props.children;
         if (!activeView) {
-            let gridData = this._transform(this.state.students);
+            let gridData = this._transform(this.state.instructors);
             activeView = (
                 <div>
                     <DataGridToolbar filterHandler={this._handleSearch} 
-                        newRecordLink={"/student/new"}
-                        newRecordLinkText={"Add Student"} />
+                        newRecordLink={"/instructor/new"}
+                        newRecordLinkText={"Add Instructor"} />
                     <DataGrid data={gridData} columnConfigs={this.columnConfigs} filter={this.state.filter} />
                 </div>
             );

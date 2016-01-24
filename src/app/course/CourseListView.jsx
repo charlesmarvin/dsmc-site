@@ -1,11 +1,11 @@
 import React from 'react';
-import DataGrid from 'components/grid/DataGrid';
-import DataGridToolbar from 'components/grid/DataGridToolbar';
-import Formatters from 'utils/Formatters';
 import {Link} from 'react-router';
-import Services from './Services';
+import DataGrid from 'app/common/grid/DataGrid';
+import DataGridToolbar from 'app/common/grid/DataGridToolbar';
+import Formatters from 'app/common/utils/Formatters';
+import Services from 'app/common/Services';
 
-export default class Packages extends React.Component {
+export default class CourseListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

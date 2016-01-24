@@ -6,8 +6,8 @@ import {
     TOKEN_LOGIN_SUCCESS, 
     TOKEN_LOGIN_FAILURE, 
     TOKEN_LOGIN_REQUESTED
-} from '../constants/LoginConstants';
-import BaseStore from './BaseStore';
+} from './LoginConstants';
+import BaseStore from 'app/common/BaseStore';
 
 
 class LoginStore extends BaseStore {

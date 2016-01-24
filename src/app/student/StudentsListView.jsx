@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router';
 import _ from 'lodash';
-import Formatters from 'utils/Formatters';
-import DataGrid from 'components/grid/DataGrid';
-import DataGridToolbar from 'components/grid/DataGridToolbar';
-import DashboardActions from '../actions/DashboardActions';
-import DashboardStore from '../stores/DashboardStore';
+import Formatters from 'app/common/utils/Formatters';
+import DataGrid from 'app/common/grid/DataGrid';
+import DataGridToolbar from 'app/common/grid/DataGridToolbar';
+import StudentActions from './StudentActions';
+import StudentStore from './StudentStore';
 
-export default class StudentsTableView extends React.Component {
+export default class StudentsListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,19 +51,19 @@ export default class StudentsTableView extends React.Component {
     }
     
     componentWillMount() {
-        DashboardStore.addChangeListener(this._onDataLoaded);
+        StudentStore.addChangeListener(this._onDataLoaded);
     }
 
     componentDidMount() {
-        DashboardActions.loadStudents();
+        StudentActions.loadStudents();
     }
     
     componentWillUnmount() {
-        DashboardStore.removeChangeListener(this._onDataLoaded);
+        StudentStore.removeChangeListener(this._onDataLoaded);
     }
 
     _onDataLoaded() {
-        this.setState({students: DashboardStore.students});
+        this.setState({students: StudentStore.students});
     }
     
     _transform(data) {

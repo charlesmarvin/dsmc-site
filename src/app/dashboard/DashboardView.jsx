@@ -4,11 +4,11 @@ import {Link} from 'react-router';
 import _ from 'lodash';
 import moment from 'moment';
 import Highcharts from 'react-highcharts/dist/bundle/highcharts';
-import DashboardActions from '../actions/DashboardActions';
-import DashboardStore from '../stores/DashboardStore';
-import CalendarGridView from './CalendarGridView';
+import DashboardActions from './DashboardActions';
+import DashboardStore from './DashboardStore';
 import AddSessionView from './AddSessionView';
-import Service from './Services';
+import CalendarGridView from 'app/common/CalendarGridView';
+import Service from 'app/common/Services';
 
 const baseChartConfig = {
     chart: {

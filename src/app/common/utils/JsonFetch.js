@@ -1,4 +1,4 @@
-import LoginStore from '../stores/LoginStore';
+import LoginStore from 'app/auth/LoginStore';
 const JSON_HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

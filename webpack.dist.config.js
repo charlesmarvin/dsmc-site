@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/app/components/App.jsx',
+  entry: './src/app/Main.jsx',
 
   stats: {
     colors: true,
@@ -44,8 +44,7 @@ module.exports = {
     alias: {
         'vendor': __dirname + '/src/vendor',
         'styles': __dirname + '/src/styles',
-        'components': __dirname + '/src/app/components',
-        'utils': __dirname + '/src/app/utils'
+        'app': __dirname + '/src/app'
     }
   },
 
@@ -53,25 +52,19 @@ module.exports = {
     preLoaders: [{
       test: /\.(js|jsx)$/,
       exclude: [ /node_modules/, /vendor/ ],
-      loader: 'eslint-loader'
+      loaders: [ 'eslint' ]
     }],
 
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
+      loaders: [ 'babel' ]
     }, {
       test: /\.(sass|scss|css)$/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+      loaders: [ 'style', 'css', 'sass' ]
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }, { 
-      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-      loader: "url-loader?limit=10000&minetype=application/font-woff" 
-    }, { 
-      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-      loader: "file-loader" 
+      loaders: [ 'url?limit=8192' ]
     }]
   }
 };

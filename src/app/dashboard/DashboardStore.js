@@ -1,13 +1,9 @@
 import {
     DASHBOARD_REQUESTED, 
     DASHBOARD_REQUEST_SUCCESS, 
-    DASHBOARD_REQUEST_FAILURE,
-    STUDENTS_REQUEST_SUCCESS,
-    STUDENTS_REQUEST_FAILURE,
-    INSTRUCTORS_REQUEST_SUCCESS,
-    INSTRUCTORS_REQUEST_FAILURE
-} from '../constants/AppConstants';
-import BaseStore from './BaseStore';
+    DASHBOARD_REQUEST_FAILURE
+} from 'app/common/AppConstants';
+import BaseStore from 'app/common/BaseStore';
 
 class DashboardStore extends BaseStore {
 
@@ -42,20 +38,6 @@ class DashboardStore extends BaseStore {
             break;
         case DASHBOARD_REQUEST_FAILURE:
             this._isLoading = false;
-            this.emitChange();
-            break;
-        case STUDENTS_REQUEST_SUCCESS:
-            this._students = action.students;
-            this.emitChange();
-            break;
-        case STUDENTS_REQUEST_FAILURE:
-            this.emitChange();
-            break;
-        case INSTRUCTORS_REQUEST_SUCCESS:
-            this._instructors = action.instructors;
-            this.emitChange();
-            break;
-        case INSTRUCTORS_REQUEST_FAILURE:
             this.emitChange();
             break;
         default:

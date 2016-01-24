@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
-import LoginStore from '../stores/LoginStore';
-import LoginActions from '../actions/LoginActions';
+import LoginStore from '../auth/LoginStore';
+import LoginActions from '../auth/LoginActions';
 
-export default class Main extends React.Component {
+export default class AppContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,7 @@ export default class Main extends React.Component {
             navLinks = (
                 <span>
                     <Link to="/students" activeClassName="border-bottom" className="btn py2" title="View All Students">Students</Link>
-                    <Link to="/packages" activeClassName="border-bottom" className="btn py2" title="View All Packages">Packages</Link>
+                    <Link to="/courses" activeClassName="border-bottom" className="btn py2" title="View All Courses">Courses</Link>
                     <Link to="/instructors" activeClassName="border-bottom" className="btn py2" title="View All Instructors">Instructors</Link>
                 </span>
             );
@@ -77,6 +77,6 @@ export default class Main extends React.Component {
     }
 }
 
-Main.propTypes = {
+AppContainer.propTypes = {
     children: React.PropTypes.node
 };

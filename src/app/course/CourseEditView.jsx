@@ -1,8 +1,8 @@
 import React from 'react';
-import Services from './Services';
+import Services from 'app/common/Services';
 import _ from 'lodash';
 
-export default class Package extends React.Component {
+export default class CourseEditView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

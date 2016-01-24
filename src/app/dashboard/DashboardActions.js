@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatchers/AppDispatcher.js';
+import AppDispatcher from 'app/common/AppDispatcher.js';
 import {
     API_CONTEXT, 
     DASHBOARD_REQUESTED, 
@@ -10,8 +10,8 @@ import {
     INSTRUCTORS_REQUESTED,
     INSTRUCTORS_REQUEST_SUCCESS,
     INSTRUCTORS_REQUEST_FAILURE
-} from '../constants/AppConstants.js';
-import {get} from 'utils/JsonFetch';
+} from 'app/common/AppConstants.js';
+import {get} from 'app/common/utils/JsonFetch';
 
 export default {
     loadDashboardData: () => {

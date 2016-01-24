@@ -18,7 +18,7 @@ module.exports = {
   devtool: false,
   entry: [
       'webpack/hot/only-dev-server',
-      './src/app/components/App.jsx'
+      './src/app/Main.jsx'
   ],
 
   stats: {
@@ -31,35 +31,28 @@ module.exports = {
     alias: {
         'vendor': __dirname + '/src/vendor',
         'styles': __dirname + '/src/styles',
-        'components': __dirname + '/src/app/components',
-        'utils': __dirname + '/src/app/utils'
+        'app': __dirname + '/src/app'
     }
   },
   module: {
     preLoaders: [{
       test: /\.(js|jsx)$/,
       exclude: [ /node_modules/, /vendor/ ],
-      loader: 'eslint-loader'
+      loaders: [ 'eslint' ]
     }],
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: ["react-hot", "babel"]
+      loaders: ['react-hot', 'babel']
     }, {
       test: /\.(sass|scss)$/,
-      loaders: ["style", "css", "sass?outputStyle=expanded"]
+      loaders: ['style', 'css', 'sass?outputStyle=expanded']
     }, {
       test: /\.css$/,
-      loaders: ["style", "css"]
+      loaders: ['style', 'css']
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }, { 
-      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-      loader: "url-loader?limit=10000&minetype=application/font-woff" 
-    }, { 
-      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-      loader: "file-loader" 
+      loaders: [ 'url?limit=8192' ]
     }]
   },
 

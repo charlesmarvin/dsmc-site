@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatchers/AppDispatcher.js';
+import AppDispatcher from 'app/common/AppDispatcher.js';
 import {
     LOGIN_SUCCESS, 
     LOGOUT_USER, 
@@ -7,10 +7,10 @@ import {
     TOKEN_LOGIN_SUCCESS, 
     TOKEN_LOGIN_FAILURE, 
     TOKEN_LOGIN_REQUESTED
-} from '../constants/LoginConstants.js';
-import {API_CONTEXT} from '../constants/AppConstants.js';
-import history from 'utils/History';
-import {get, post} from 'utils/JsonFetch';
+} from './LoginConstants.js';
+import {API_CONTEXT} from 'app/common/AppConstants.js';
+import history from 'app/common/utils/History';
+import {get, post} from 'app/common/utils/JsonFetch';
 
 export default {
     authenticateFromToken: () => {

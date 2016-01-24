@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
-import LoginActions from '../actions/LoginActions';
-import LoginStore from '../stores/LoginStore';
+import LoginActions from './LoginActions';
+import LoginStore from './LoginStore';
 
-export default class Login extends React.Component {
+export default class LoginView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

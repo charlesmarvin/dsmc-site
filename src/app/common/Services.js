@@ -1,5 +1,5 @@
-import LoginActions from '../actions/LoginActions';
-import LoginStore from '../stores/LoginStore';
+import LoginActions from 'app/auth/LoginActions';
+import LoginStore from 'app/auth/LoginStore';
 
 const host = (document.location.hostname === 'localhost') ? 'http://localhost:8080' 
     : 'http://dsmc-api.cfapps.io';
