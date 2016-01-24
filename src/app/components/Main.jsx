@@ -9,6 +9,7 @@ export default class Main extends React.Component {
         this.state = {
             isOpen: false, 
             isLoggedIn: LoginStore.isLoggedIn,
+            isLoading: LoginStore.isLoading,
             showAddView: false
         };
         this._onChange = this._onChange.bind(this);
@@ -24,7 +25,10 @@ export default class Main extends React.Component {
     }
 
     _onChange() {
-        this.setState({isLoggedIn: LoginStore.isLoggedIn});
+        this.setState({
+            isLoggedIn: LoginStore.isLoggedIn,
+            isLoading: LoginStore.isLoading
+        });
     }
     
     _toggleNav(event) {
@@ -37,8 +41,8 @@ export default class Main extends React.Component {
     }
     
     render() {
-        var navLinks = '', loginLinks = '';
-        if (this.state.isLoggedIn) {
+        let navLinks = '', loginLinks = '';
+        if (this.state.isLoggedIn && !this.state.isLoading) {
             navLinks = (
                 <span>
                     <Link to="/students" activeClassName="border-bottom" className="btn py2" title="View All Students">Students</Link>
@@ -50,6 +54,11 @@ export default class Main extends React.Component {
         } else {
             loginLinks = (<Link to="/login" className="btn py2" title="Login">Login</Link>);
         }
+        let loader = '';
+        if (this.state.isLoading) {
+            loader = <div className="sk-rotating-plane"></div>;
+        }
+
         return (
             <div>
                 <nav className="clearfix mb1">
@@ -62,6 +71,7 @@ export default class Main extends React.Component {
                   </div>
                 </nav>
                 {this.props.children}
+                {loader}
             </div>
         );
     }

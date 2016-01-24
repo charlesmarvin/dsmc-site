@@ -31,7 +31,9 @@ export default {
             })
             .catch((e) => {
                 console.warn('Could not authenticate from token. Error: ' + JSON.stringify(e));
-                AppDispatcher.dispatch({actionType: TOKEN_LOGIN_FAILURE});
+                AppDispatcher.dispatch({
+                    actionType: TOKEN_LOGIN_FAILURE
+                });
                 history.replaceState(null, '/login');
             });
             console.debug('Authenticated from token.');

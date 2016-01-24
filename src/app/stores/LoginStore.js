@@ -19,7 +19,6 @@ class LoginStore extends BaseStore {
         this._loginFailureMsg = '';
         this._isLoading = false;
         this._hasError = false; 
-        this._tokenLogin = false;
     }
 
     _onAction(action) {
@@ -28,7 +27,6 @@ class LoginStore extends BaseStore {
         case TOKEN_LOGIN_REQUESTED:
             this._isLoading = true;
             this._hasError = false;
-            this._tokenLogin = this._isTokenLogin(action.actionType);
             this._jwt = this._isTokenLogin(action.actionType) ? action.jwt : null;
             this.emitChange();
             break;
@@ -37,15 +35,14 @@ class LoginStore extends BaseStore {
             this._jwt = action.jwt;
             this._isLoading = false; 
             this._hasError = false;
-            this._tokenLogin = this._isTokenLogin(action.actionType);
             this.emitChange();
             break;
         case LOGIN_FAILURE:
         case TOKEN_LOGIN_FAILURE:
-            this._loginFailureMsg = action.error;
+            this._loginFailureMsg = this._isTokenLogin(action.actionType) ? '' : action.error;
             this._isLoading = false; 
             this._hasError = true;
-            this._tokenLogin = this._isTokenLogin(action.actionType);
+            this._jwt = null;
             this.emitChange();
             break;
         case LOGOUT_USER:
@@ -58,7 +55,11 @@ class LoginStore extends BaseStore {
     }
 
     _isTokenLogin(action) {
-        let tokenActions = [TOKEN_LOGIN_SUCCESS, TOKEN_LOGIN_FAILURE, TOKEN_LOGIN_REQUESTED];
+        let tokenActions = [
+            TOKEN_LOGIN_SUCCESS, 
+            TOKEN_LOGIN_FAILURE, 
+            TOKEN_LOGIN_REQUESTED
+        ];
         return tokenActions.indexOf(action) !== -1; 
     }
 
@@ -80,10 +81,6 @@ class LoginStore extends BaseStore {
 
     get isLoading() {
         return this._isLoading;
-    }
-
-    get isTokenLogin() {
-        return this._tokenLogin;
     }
 }
 
