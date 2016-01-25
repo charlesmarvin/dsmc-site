@@ -8,17 +8,17 @@ import LoginActions from './auth/LoginActions';
 import LoginStore from './auth/LoginStore';
 import History from './common/utils/History';
 
-const AppContainer = require('./main/AppContainer');
-const NotFound = require('./common/NotFound');
-const DashboardView = require('./dashboard/DashboardView');
-const CourseListView = require('./course/CourseListView');
-const CourseEditView = require('./course/CourseEditView');
-const StudentsListView = require('./student/StudentsListView');
-const StudentEditView = require('./student/StudentEditView');
-const Admin = require('./admin/Admin');
-const LoginView = require('./auth/LoginView');
-const InstructorsTableView = require('./instructor/InstructorsTableView');
-const InstructorView = require('./instructor/InstructorView');
+import AppContainer from './main/AppContainer';
+import NotFound from './common/NotFound';
+import DashboardView from './dashboard/DashboardView';
+import CourseListView from './course/CourseListView';
+import CourseEditView from './course/CourseEditView';
+import StudentsListView from './student/StudentsListView';
+import StudentEditView from './student/StudentEditView';
+import Admin from './admin/Admin';
+import LoginView from './auth/LoginView';
+import InstructorsTableView from './instructor/InstructorsTableView';
+import InstructorView from './instructor/InstructorView';
 
 var router = (
     <Router history={History}>

@@ -27,21 +27,19 @@ function doFetch(method, url, data = null) {
     .then(handleErrors)
     .then((response) => response.json());
 }
-export default {
-    get(url) {
-        return doFetch('get', url);
-    },
+export function get(url) {
+    return doFetch('get', url);
+}
 
-    post(url, data) {
-        return doFetch('post', url, data);
-    },
+export function post(url, data) {
+    return doFetch('post', url, data);
+}
 
-    put(url, data) {
-        return doFetch('put', url, data);
-    },
+export function put(url, data) {
+    return doFetch('put', url, data);
+}
 
-    patch(url, data) {
-        return doFetch('patch', url, data);
-    }
+export function patch(url, data) {
+    return doFetch('patch', url, data);
+}
 
-};

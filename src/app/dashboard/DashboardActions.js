@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import AppDispatcher from 'app/common/AppDispatcher.js';
 import {
     API_CONTEXT, 
@@ -21,10 +22,8 @@ export default {
         return get(API_CONTEXT + 'dashboard')
         .then((data) => {
             console.debug('Dashboard data loaded successfully.');
-            AppDispatcher.dispatch({
-                actionType: DASHBOARD_REQUEST_SUCCESS,
-                ...data
-            });
+            let event = _.assign({actionType: DASHBOARD_REQUEST_SUCCESS}, data);
+            AppDispatcher.dispatch(event);
         })
         .catch((e) => {
             console.warn('Failed to load dashboard data. Error: ' + JSON.stringify(e));

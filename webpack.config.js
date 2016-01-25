@@ -43,7 +43,7 @@ module.exports = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel']
+      loaders: ['react-hot', 'babel?presets[]=react&presets[]=es2015']
     }, {
       test: /\.(sass|scss)$/,
       loaders: ['style', 'css', 'sass?outputStyle=expanded']
