@@ -134,3 +134,8 @@ export default class StudentEditView extends React.Component {
         );
     }
 }
+
+StudentEditView.propTypes = {
+    params: React.PropTypes.object,
+    history: React.PropTypes.object
+};

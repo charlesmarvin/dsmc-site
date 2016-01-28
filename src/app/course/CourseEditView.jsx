@@ -70,3 +70,8 @@ export default class CourseEditView extends React.Component {
         );
     }
 }
+
+CourseEditView.propTypes = {
+    params: React.PropTypes.object,
+    history: React.PropTypes.object
+};

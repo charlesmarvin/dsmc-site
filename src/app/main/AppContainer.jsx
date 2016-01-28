@@ -45,9 +45,12 @@ export default class AppContainer extends React.Component {
         if (this.state.isLoggedIn && !this.state.isLoading) {
             navLinks = (
                 <span>
-                    <Link to="/students" activeClassName="border-bottom" className="btn py2" title="View All Students">Students</Link>
-                    <Link to="/courses" activeClassName="border-bottom" className="btn py2" title="View All Courses">Courses</Link>
-                    <Link to="/instructors" activeClassName="border-bottom" className="btn py2" title="View All Instructors">Instructors</Link>
+                    <Link to="/students" activeClassName="border-bottom" 
+                        className="btn py2" title="View All Students">Students</Link>
+                    <Link to="/courses" activeClassName="border-bottom" 
+                        className="btn py2" title="View All Courses">Courses</Link>
+                    <Link to="/instructors" activeClassName="border-bottom" 
+                        className="btn py2" title="View All Instructors">Instructors</Link>
                 </span>
             );
             loginLinks = (<a onClick={this._logout} className="btn py2" title="Logout">Logout</a>);

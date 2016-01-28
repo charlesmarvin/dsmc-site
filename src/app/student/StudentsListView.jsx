@@ -101,3 +101,7 @@ export default class StudentsListView extends React.Component {
         return (activeView);
     }
 }
+
+StudentsListView.propTypes = {
+    children: React.PropTypes.node
+};

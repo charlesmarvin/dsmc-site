@@ -4,16 +4,23 @@ import moment from 'moment';
 export default class AddSessionView extends React.Component {
     constructor(props) {
         super(props);
-        let m = this._getMomentFromTime(props.sessionDatetime);
         this.state = {
             studentId: props.studentId,
             instructorId: props.instructorId,
             sessionDatetime: props.sessionDatetime,
-            selectedDateTime: (this.props.sessionDatetime && m.isValid()) ? m : null
+            selectedDateTime: (this.props.sessionDatetime && this._getMomentFromTime(props.sessionDatetime).isValid()) ? this._getMomentFromTime(props.sessionDatetime) : null
         };
     }
     _getMomentFromTime(value) {
-        return moment(value, ['HH:mm', 'h:mm a', 'M/D/YYYY HH:mm', 'M/D/YYYY h:mm a', 'M-D-YYYY h:mm a', 'YYYY-MM-DDTHH:mm:ss', 'YYYY-MM-DDTHH:mm'], true);
+        return moment(value, [
+            'HH:mm', 
+            'h:mm a', 
+            'M/D/YYYY HH:mm', 
+            'M/D/YYYY h:mm a', 
+            'M-D-YYYY h:mm a', 
+            'YYYY-MM-DDTHH:mm:ss', 
+            'YYYY-MM-DDTHH:mm'
+        ], true);
     }
     _onStudentSelected(event) {
         this.setState({studentId: event.target.value});
@@ -60,15 +67,23 @@ export default class AddSessionView extends React.Component {
             && this.state.selectedDateTime.isValid());
     }
 
+    _renderStudentOptions() {
+        return this.props.students.map(function(s) {
+            console.log('adding student to dropdown ' + s.fullName);
+            return <option key={s.id} value={s.id}>{s.fullName}</option>;
+        });
+    }
+
+    _renderInstructorOptions() {
+        return this.props.instructors.map(function(i) {
+            return <option key={i.id} value={i.id}>{i.fullName}</option>;
+        });
+    }
+
     render() {
-        let studentOptions = this.props.students.map(function(s) {
-            return (<option key={s.id} value={s.id}>{s.fullName}</option>);
-        });
-        let instructorOptions = this.props.instructors.map(function(i) {
-            return (<option key={i.id} value={i.id}>{i.fullName}</option>);
-        });
         let dt = this.state.selectedDateTime;
-        let selectedDateTimePreview = (dt && dt.isValid()) ? dt.calendar(null, {sameElse: 'M/D/YYYY h:mm a'}) : '';
+        let selectedDateTimePreview = (dt && dt.isValid()) ? 
+            dt.calendar(null, {sameElse: 'M/D/YYYY h:mm a'}) : '';
         return (
             <form className="forms p2 fit" noValidate>
                 <div className="flex flex-wrap flex-end">
@@ -78,7 +93,7 @@ export default class AddSessionView extends React.Component {
                             value={this.state.studentId} 
                             onChange={(event) => this._onStudentSelected(event)}>
                             <option>-- select --</option>
-                            {studentOptions}
+                            {this._renderStudentOptions()}
                         </select>
                     </div>
                     <div className="md-col-3 p1">
@@ -87,7 +102,7 @@ export default class AddSessionView extends React.Component {
                             value={this.state.instructorId}  
                             onChange={(event) => this._onInstructorSelected(event)}>
                             <option>-- select --</option>
-                            {instructorOptions}
+                            {this._renderInstructorOptions()}
                         </select>
                     </div>
 
@@ -106,11 +121,22 @@ export default class AddSessionView extends React.Component {
                     </div>
 
                     <div className="flex-none p2">
-                        <button type="submit" className="btn btn-primary" disabled={!this._isValid()} onClick={(event) => this._onSave(event)}>Save</button>
-                        <button type="reset" className="btn" onClick={(event) => this._onCancel(event)}>Cancel</button>
+                        <button type="submit" className="btn btn-primary" disabled={!this._isValid()} 
+                            onClick={(event) => this._onSave(event)}>Save</button>
+                        <button type="reset" className="btn" 
+                            onClick={(event) => this._onCancel(event)}>Cancel</button>
                     </div>
                 </div>
             </form>
         );
     }
 }
+
+AddSessionView.propTypes = {
+    studentId: React.PropTypes.any,
+    instructorId: React.PropTypes.any,
+    sessionDatetime: React.PropTypes.object,
+    students: React.PropTypes.arrayOf(React.PropTypes.object),
+    instructors: React.PropTypes.arrayOf(React.PropTypes.object),
+    onSave: React.PropTypes.func.isRequired
+};

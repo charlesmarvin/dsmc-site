@@ -101,3 +101,7 @@ export default class InstructorsTableView extends React.Component {
         return (activeView);
     }
 }
+
+InstructorsTableView.propTypes = {
+    children: React.PropTypes.node
+};

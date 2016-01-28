@@ -71,5 +71,7 @@ export default class CourseListView extends React.Component {
         }
         return (activeView);
     }
-
 }
+CourseListView.propTypes = {
+    children: React.PropTypes.node
+};

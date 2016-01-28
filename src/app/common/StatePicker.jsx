@@ -62,3 +62,10 @@ export default class UsStatePicker extends React.Component {
         );
     }
 }
+
+UsStatePicker.propTypes = {
+    id: React.PropTypes.string,
+    className: React.PropTypes.string,
+    value: React.PropTypes.string,
+    onChange: React.PropTypes.func.idRequired
+};

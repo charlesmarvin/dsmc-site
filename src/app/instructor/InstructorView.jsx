@@ -20,7 +20,7 @@ export default class InstructorView extends React.Component {
         var {id} = this.props.params;
         if (!(_.isEmpty(id) || id === 'new')) {
             this.setState({id});
-            Services.getInstructor(id).then((data) => this.setState({instructor: data}) );
+            Services.getInstructor(id).then((data) => this.setState({instructor: data}));
         }
     }
     
@@ -121,3 +121,8 @@ export default class InstructorView extends React.Component {
         );
     }
 }
+
+InstructorView.propTypes = {
+    params: React.PropTypes.object,
+    history: React.PropTypes.object
+};

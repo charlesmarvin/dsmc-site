@@ -7,7 +7,7 @@ import Highcharts from 'react-highcharts/dist/bundle/highcharts';
 import DashboardActions from './DashboardActions';
 import DashboardStore from './DashboardStore';
 import AddSessionView from './AddSessionView';
-import CalendarGridView from 'app/common/CalendarGridView';
+import CalendarGridView from 'app/common/calendar/CalendarGridView';
 import Service from 'app/common/Services';
 
 const baseChartConfig = {
@@ -47,7 +47,7 @@ const baseChartConfig = {
     }]
 };
 
-export default class Dashboard extends React.Component {
+export default class DashboardView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -60,6 +60,7 @@ export default class Dashboard extends React.Component {
             instructionSessions: []
         };
         this._onDashboardDataChanged = this._onDashboardDataChanged.bind(this);
+        this._onSessionSave = this._onSessionSave.bind(this);
     }
 
     componentWillMount() {
@@ -158,7 +159,7 @@ export default class Dashboard extends React.Component {
                 <AddSessionView 
                     students={this.state.students} 
                     instructors={this.state.instructors}
-                    onSave={(e) => this._onSessionSave(e)} />
+                    onSave={this._onSessionSave} />
                 <CalendarGridView sessions={this.state.instructionSessions} selected={moment().startOf('day')}/>
             </div>
         );
