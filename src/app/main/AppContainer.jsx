@@ -7,13 +7,10 @@ export default class AppContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false, 
             isLoggedIn: LoginStore.isLoggedIn,
-            isLoading: LoginStore.isLoading,
-            showAddView: false
+            isLoading: LoginStore.isLoading
         };
         this._onChange = this._onChange.bind(this);
-        this._toggleNav = this._toggleNav.bind(this);
     }
     
     componentDidMount() {
@@ -29,10 +26,6 @@ export default class AppContainer extends React.Component {
             isLoggedIn: LoginStore.isLoggedIn,
             isLoading: LoginStore.isLoading
         });
-    }
-    
-    _toggleNav(event) {
-        this.setState({isOpen: !this.state.isOpen});
     }
     
     _logout(event) {

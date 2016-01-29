@@ -4,11 +4,12 @@ import moment from 'moment';
 export default class AddSessionView extends React.Component {
     constructor(props) {
         super(props);
+        let dt = this._getMomentFromTime(props.sessionDatetime);
         this.state = {
             studentId: props.studentId,
             instructorId: props.instructorId,
             sessionDatetime: props.sessionDatetime,
-            selectedDateTime: (this.props.sessionDatetime && this._getMomentFromTime(props.sessionDatetime).isValid()) ? this._getMomentFromTime(props.sessionDatetime) : null
+            selectedDateTime: (this.props.sessionDatetime && dt.isValid()) ? dt : null
         };
     }
     _getMomentFromTime(value) {
@@ -69,7 +70,6 @@ export default class AddSessionView extends React.Component {
 
     _renderStudentOptions() {
         return this.props.students.map(function(s) {
-            console.log('adding student to dropdown ' + s.fullName);
             return <option key={s.id} value={s.id}>{s.fullName}</option>;
         });
     }

@@ -57,7 +57,6 @@ export default class CalendarGridView extends React.Component {
     }
 
     render() {
-        console.log('Rendering...');
         return (
             <div className="p2">
                 <div className="clearfix p2">

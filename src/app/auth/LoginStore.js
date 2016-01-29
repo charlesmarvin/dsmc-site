@@ -22,6 +22,7 @@ class LoginStore extends BaseStore {
     }
 
     _onAction(action) {
+        console.debug('LoginStore received action: ' + action.actionType);
         switch (action.actionType) {
         case LOGIN_REQUESTED:
         case TOKEN_LOGIN_REQUESTED:
@@ -47,6 +48,8 @@ class LoginStore extends BaseStore {
             break;
         case LOGOUT_USER:
             this._jwt = null;
+            this._isLoading = false; 
+            this._hasError = false;
             this.emitChange();
             break;
         default:
