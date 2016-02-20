@@ -9,7 +9,7 @@ import {
     TOKEN_LOGIN_REQUESTED
 } from './LoginConstants.js';
 import {API_CONTEXT} from 'app/common/AppConstants';
-import history from 'app/common/utils/History';
+import {hashHistory as history} from 'react-router';
 import {get, post} from 'app/common/utils/JsonFetch';
 
 export default {
@@ -27,14 +27,14 @@ export default {
                     actionType: TOKEN_LOGIN_SUCCESS,
                     jwt
                 });
-                history.replaceState(null, '/');
+                history.replace('/');
             })
             .catch((e) => {
                 console.warn('Could not authenticate from token. Error: ' + JSON.stringify(e));
                 AppDispatcher.dispatch({
                     actionType: TOKEN_LOGIN_FAILURE
                 });
-                history.replaceState(null, '/login');
+                history.replace('/login');
             });
             console.debug('Authenticated from token.');
         }
@@ -52,7 +52,7 @@ export default {
                 actionType: LOGIN_SUCCESS,
                 jwt: data.jwt
             });
-            history.replaceState(null, '/');
+            history.replace('/');
         })
         .catch((e) => {
             console.warn('User [' + username + '] loggin failed. Error: ' + JSON.stringify(e));

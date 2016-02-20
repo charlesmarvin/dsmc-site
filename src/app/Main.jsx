@@ -2,11 +2,10 @@ require('styles/main.sass');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute} from 'react-router';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import RouterContainer from './common/RouterContainer';
 import LoginActions from './auth/LoginActions';
 import LoginStore from './auth/LoginStore';
-import History from './common/utils/History';
 
 import AppContainer from './main/AppContainer';
 import NotFound from './common/NotFound';
@@ -21,7 +20,7 @@ import InstructorsTableView from './instructor/InstructorsTableView';
 import InstructorView from './instructor/InstructorView';
 
 var router = (
-    <Router history={History}>
+    <Router history={hashHistory}>
         <Route path="/" component={AppContainer}>
             <IndexRoute component={DashboardView} onEnter={requireAuth}/>
             <Route path="courses" component={CourseListView} onEnter={requireAuth}>
@@ -40,9 +39,9 @@ var router = (
     </Router>
 );
 
-function requireAuth(nextState, replaceState) {
+function requireAuth(nextState, replace) {
     if (!LoginStore.isLoggedIn) {
-        replaceState({nextPathname: nextState.location.pathname}, '/login');
+        replace({nextPathname: nextState.location.pathname}, '/login');
     }
 }
 
