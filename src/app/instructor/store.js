@@ -1,32 +1,32 @@
 import {
-    STUDENTS_REQUESTED,
-    STUDENTS_REQUEST_SUCCESS,
-    STUDENTS_REQUEST_FAILURE
+    INSTRUCTORS_REQUESTED,
+    INSTRUCTORS_REQUEST_SUCCESS,
+    INSTRUCTORS_REQUEST_FAILURE
 } from './constants';
 import BaseStore from 'app/common/BaseStore';
 
-class StudentStore extends BaseStore {
+class Store extends BaseStore {
 
     constructor() {
         super();
         this.subscribe(() => this._onAction.bind(this));
         this._isLoading = false;
         this._hasError = false; 
-        this._students = [];
+        this._instructors = [];
     }
 
     _onAction(action) {
         switch (action.actionType) {
-        case STUDENTS_REQUESTED:
+        case INSTRUCTORS_REQUESTED:
             this._isLoading = true;
             this.emitChange();
             break;
-        case STUDENTS_REQUEST_SUCCESS:
-            this._students = action.students;
+        case INSTRUCTORS_REQUEST_SUCCESS:
+            this._instructors = action.instructors;
             this._isLoading = false;
             this.emitChange();
             break;
-        case STUDENTS_REQUEST_FAILURE:
+        case INSTRUCTORS_REQUEST_FAILURE:
             this._isLoading = false;
             this.emitChange();
             break;
@@ -35,8 +35,8 @@ class StudentStore extends BaseStore {
         }
     }
 
-    get students() {
-        return this._students;
+    get instructors() {
+        return this._instructors;
     }
 
     get isLoading() {
@@ -44,4 +44,4 @@ class StudentStore extends BaseStore {
     }
 }
 
-export default new StudentStore();
+export default new Store();

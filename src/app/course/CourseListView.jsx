@@ -4,19 +4,21 @@ import DataGrid from 'app/common/grid/DataGrid';
 import DataGridToolbar from 'app/common/grid/DataGridToolbar';
 import Formatters from 'app/common/utils/Formatters';
 import Services from 'app/common/Services';
+import CourseActions from './actions';
+import CourseStore from './store';
 
 export default class CourseListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            packages: []
+            courses: []
         };
         this.columnConfigs = [
             {
                 field: 'name',
                 render(val, context, id) {
                     return (
-                        <Link to={`/package/${id}`}>
+                        <Link to={`/course/${id}`}>
                             {val}
                         </Link>
                     );
@@ -26,7 +28,7 @@ export default class CourseListView extends React.Component {
                 field: 'active',
                 render(val, context, id) {
                     function updateActiveStatus(event) {
-                        HTTP.patch('/api/v1/packages/' + id, {active: event.target.checked});
+                        HTTP.patch('/api/v1/courses/' + id, {active: event.target.checked});
                     }
                     return (
                         <input type="checkbox" defaultChecked={val} onChange={updateActiveStatus} />
@@ -42,12 +44,23 @@ export default class CourseListView extends React.Component {
                 format: Formatters.currency
             }
         ];
+        this._onDataLoaded = this._onDataLoaded.bind(this);
+    }
+
+    componentWillMount() {
+        CourseStore.addChangeListener(this._onDataLoaded);
+    }
+
+    componentDidMount() {
+        CourseActions.loadCourses();
     }
     
-    componentWillMount() {
-        Services.getPackages().then(function(data) {
-            this.setState({packages: data});
-        }.bind(this));
+    componentWillUnmount() {
+        CourseStore.removeChangeListener(this._onDataLoaded);
+    }
+
+    _onDataLoaded() {
+        this.setState({courses: CourseStore.courses});
     }
     
     _handleSearch(filterString) {
@@ -62,9 +75,9 @@ export default class CourseListView extends React.Component {
             activeView = (
                 <div>
                     <DataGridToolbar filterHandler={this._handleSearch} 
-                        newRecordLink={"/package/new"}
+                        newRecordLink={"/course/new"}
                         newRecordLinkText={"Add Package"} />
-                    <DataGrid data={this.state.packages} columnConfigs={this.columnConfigs} 
+                    <DataGrid data={this.state.courses} columnConfigs={this.columnConfigs} 
                         filter={this.state.filter} />
                 </div>
             );

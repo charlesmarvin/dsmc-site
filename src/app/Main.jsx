@@ -16,8 +16,8 @@ import StudentsListView from './student/StudentsListView';
 import StudentEditView from './student/StudentEditView';
 import Admin from './admin/Admin';
 import LoginView from './auth/LoginView';
-import InstructorsTableView from './instructor/InstructorsTableView';
-import InstructorView from './instructor/InstructorView';
+import InstructorsListView from './instructor/InstructorsListView';
+import InstructorEditView from './instructor/InstructorEditView';
 
 var router = (
     <Router history={hashHistory}>
@@ -29,8 +29,8 @@ var router = (
             <Route path="students" component={StudentsListView} onEnter={requireAuth}>
                 <Route path="/student/:id" component={StudentEditView} onEnter={requireAuth}/>
             </Route>
-            <Route path="instructors" component={InstructorsTableView} onEnter={requireAuth}>
-                <Route path="/instructor/:id" component={InstructorView} onEnter={requireAuth}/>
+            <Route path="instructors" component={InstructorsListView} onEnter={requireAuth}>
+                <Route path="/instructor/:id" component={InstructorEditView} onEnter={requireAuth}/>
             </Route>
             <Route path="admin" component={Admin} onEnter={requireAuth}/>
             <Route path="login" component={LoginView}/>

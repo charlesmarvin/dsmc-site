@@ -4,8 +4,8 @@ import _ from 'lodash';
 import Formatters from 'app/common/utils/Formatters';
 import DataGrid from 'app/common/grid/DataGrid';
 import DataGridToolbar from 'app/common/grid/DataGridToolbar';
-import StudentActions from './StudentActions';
-import StudentStore from './StudentStore';
+import StudentActions from './actions';
+import StudentStore from './store';
 
 export default class StudentsListView extends React.Component {
     constructor(props) {

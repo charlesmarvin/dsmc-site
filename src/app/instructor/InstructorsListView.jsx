@@ -4,10 +4,10 @@ import _ from 'lodash';
 import Formatters from 'app/common/utils/Formatters';
 import DataGrid from 'app/common/grid/DataGrid';
 import DataGridToolbar from 'app/common/grid/DataGridToolbar';
-import DashboardActions from 'app/dashboard/DashboardActions';
-import DashboardStore from 'app/dashboard/DashboardStore';
+import InstructorActions from './actions';
+import InstructorStore from './store';
 
-export default class InstructorsTableView extends React.Component {
+export default class InstructorsListView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,19 +51,19 @@ export default class InstructorsTableView extends React.Component {
     }
 
     componentWillMount() {
-        DashboardStore.addChangeListener(this._onDataLoaded);
+        InstructorStore.addChangeListener(this._onDataLoaded);
     }
 
     componentDidMount() {
-        DashboardActions.loadInstructors();
+        InstructorActions.loadInstructors();
     }
     
     componentWillUnmount() {
-        DashboardStore.removeChangeListener(this._onDataLoaded);
+        InstructorStore.removeChangeListener(this._onDataLoaded);
     }
 
     _onDataLoaded() {
-        this.setState({instructors: DashboardStore.instructors});
+        this.setState({instructors: InstructorStore.instructors});
     }
     
     _transform(data) {
@@ -102,6 +102,6 @@ export default class InstructorsTableView extends React.Component {
     }
 }
 
-InstructorsTableView.propTypes = {
+InstructorsListView.propTypes = {
     children: React.PropTypes.node
 };

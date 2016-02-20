@@ -5,7 +5,7 @@ import Services from 'app/common/Services';
 import Formatters from 'app/common/utils/Formatters';
 import RouterContainer from 'app/common/RouterContainer';
 
-export default class InstructorView extends React.Component {
+export default class InstructorEditView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ export default class InstructorView extends React.Component {
         event.preventDefault();
         if (_.isEmpty(this.state.id)) {
             Services.createInstructor(this.state.instructor)
-            	.then((r) => this.props.history.pushState(null, '/instructors'));
+            	.then((r) => this.props.history.pushState('/instructors'));
         } else {
             Services.updateInstructor(this.state.id, this.state.instructor);
         }
@@ -122,7 +122,7 @@ export default class InstructorView extends React.Component {
     }
 }
 
-InstructorView.propTypes = {
+InstructorEditView.propTypes = {
     params: React.PropTypes.object,
     history: React.PropTypes.object
 };
