@@ -17,6 +17,6 @@ deploy:
   api: https://api.run.pivotal.io
   username: marvin.charles@gmail.com
   password: $CLOUD_FOUNDRY_PASSWORD
-  organization: threetwoonefive
+  organization: 24sixty
   space: development
   edge: true
