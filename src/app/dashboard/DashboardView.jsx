@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 import _ from 'lodash';
 import moment from 'moment';
-import Highcharts from 'react-highcharts/dist/bundle/highcharts';
+import Highcharts from 'highcharts';
 import DashboardActions from './DashboardActions';
 import DashboardStore from './DashboardStore';
 import AddSessionView from './AddSessionView';
@@ -59,12 +58,10 @@ export default class DashboardView extends React.Component {
             instructors: [],
             instructionSessions: []
         };
-        this._onDashboardDataChanged = this._onDashboardDataChanged.bind(this);
-        this._onSessionSave = this._onSessionSave.bind(this);
     }
 
     componentWillMount() {
-        DashboardStore.addChangeListener(this._onDashboardDataChanged);
+        DashboardStore.addChangeListener(() => this._onDashboardDataChanged);
     }
 
     componentDidMount() {
@@ -72,7 +69,7 @@ export default class DashboardView extends React.Component {
     }
     
     componentWillUnmount() {
-        DashboardStore.removeChangeListener(this._onDashboardDataChanged);
+        DashboardStore.removeChangeListener(() => this._onDashboardDataChanged);
     }
 
     _onDashboardDataChanged() {

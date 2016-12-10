@@ -8,7 +8,7 @@ import {
     TOKEN_LOGIN_FAILURE, 
     TOKEN_LOGIN_REQUESTED
 } from './LoginConstants.js';
-import {API_CONTEXT} from 'app/common/AppConstants';
+import {AUTH_CONTEXT} from 'app/common/AppConstants';
 import {hashHistory as history} from 'react-router';
 import {get, post} from 'app/common/utils/JsonFetch';
 
@@ -21,7 +21,7 @@ export default {
                 actionType: TOKEN_LOGIN_REQUESTED,
                 jwt
             });
-            return get(API_CONTEXT + 'auth/token')
+            return get(AUTH_CONTEXT + 'token')
             .then((data) => {
                 AppDispatcher.dispatch({
                     actionType: TOKEN_LOGIN_SUCCESS,
@@ -43,7 +43,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: LOGIN_REQUESTED
         });
-        return post(API_CONTEXT + 'auth/login', {username, password})
+        return post(AUTH_CONTEXT + 'login', {username, password})
         .then((data) => {
             console.debug('User [' + username + '] logged in successfully. ' + JSON.stringify(data));
             localStorage.setItem('jwt', data.jwt);

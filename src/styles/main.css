@@ -1,9 +1,9 @@
 
-$spinkit-size: 16px !default;
-$spinkit-spinner-color: #000 !default;
 
 body {
+  font-family: Helvetica;
   font-size: 90%;
+  line-height: 1.5em;
 }
 .small {
   font-size: 75%;

@@ -45,15 +45,16 @@ module.exports = {
       exclude: /node_modules/,
       loaders: ['react-hot', 'babel?presets[]=react&presets[]=es2015']
     }, {
-      test: /\.(sass|scss)$/,
-      loaders: ['style', 'css', 'sass?outputStyle=expanded']
-    }, {
       test: /\.css$/,
-      loaders: ['style', 'css']
+      loaders: ['style', 'css', 'postcss']
     }, {
       test: /\.(png|jpg)$/,
       loaders: [ 'url?limit=8192' ]
     }]
+  },
+
+  postcss: function () {
+    return [require('autoprefixer'), require('precss')];
   },
 
   plugins: [

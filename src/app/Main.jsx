@@ -1,4 +1,5 @@
-require('styles/main.sass');
+require('basscss/css/basscss.css');
+require('styles/main.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -41,7 +42,7 @@ var router = (
 
 function requireAuth(nextState, replace) {
     if (!LoginStore.isLoggedIn) {
-        replace({nextPathname: nextState.location.pathname}, '/login');
+        replace('/login');
     }
 }
 

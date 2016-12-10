@@ -2,6 +2,7 @@ var baseurl = 'http://dsmc-api.cfapps.io';
 if (document.location.hostname === 'localhost') {
     baseurl = 'http://localhost:8080';
 }
+export const AUTH_CONTEXT = baseurl + '/auth/';
 export const API_CONTEXT = baseurl + '/api/';
 export const JSON_HEADERS = {
     'Accept': 'application/json',
